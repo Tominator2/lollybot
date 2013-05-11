@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--  
+
+This is the HTML5/JavaScript interface for Lollybot (formerly known as
+"Suckerbot") my entry in the African Robotics Network (AFRON) "10
+Dollar Robot" design challlenge.
+
+See: http://tomtilley.net/projects/suckerbot for more details
+
+-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+    <title>LOLLYBOT - Telemetry &amp; Control (v0.1.0)</title>
+
+    <link rel="stylesheet" type="text/css" href="css/lollybot.css">
+
+    <!-- jQuery make JabvaScript easier to use -->
+    <script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+
+    <!-- The analog joystick graphs are Sparklines -->
+    <script type="text/javascript" src="scripts/jquery.sparkline.min.js"></script>
+
+    <!-- Socket.IO provides the communication between this client & the server -->
+    <script type="text/javascript" src="scripts/socket.io.js"></script>
+
+    <!-- This script implements the robot telemetry & control -->
+    <script type="text/javascript" src="scripts/lollybot-0.1.0.js"></script>
+
+  </head>
+
+  <body style="width:800px">
+      <div>
+	<img src="images/logo-lollybot.png" width="436" height="62" style="padding: 5px 5px 5px 0px">
+	<!-- connectin status icon -->
+      <div style="top: 5px; left: 450px; position:absolute; z-index:0">
+	<img src="images/connected.png" alt="connected">
+      </div>
+      <div id="disconnected" style="top: 5px; left: 450px; position:absolute; z-index:1">
+	<img src="images/disconnected.png" alt="connection status" title="connection status"/>
+      </div>
+      </div>
+      
+      <noscript>
+	<p style="color: red">
+          <b>You must have JavaScript turned ON to use this page!</b>
+	</p>
+      </noscript>
+      
+      <div>
+	<fieldset style="width: 505px; height: 370px">
+	  <legend>Telemetry</legend>
+	  <div id="joysticks" >
+	    <div style="position: absolute; left: 0px; top: 0px; width: 350px; height: 355px">
+	      <img src="images/joystick.png" />
+	    </div>
+	    <div id="b0" class="overlay">
+	      <img src="images/1.png" />
+	    </div>
+	    <div id="b1" class="overlay">
+	      <img src="images/2.png" />
+	    </div>
+	    <div id="b2" class="overlay">
+	      <img src="images/3.png" />
+	    </div>
+	    <div id="b3" class="overlay">
+	      <img src="images/4.png" />
+	    </div>
+	    <div id="b4" class="overlay">
+	      <img src="images/left-1.png" />
+	    </div>
+	    <div id="b5" class="overlay">
+	      <img src="images/right-1.png" />
+	    </div>
+	    <div id="b6" class="overlay">
+	      <img src="images/left-2.png" />
+	    </div>
+	    <div id="b7" class="overlay">
+	      <img src="images/right-2.png" />
+	    </div>
+	    <div id="b8" class="overlay">
+	      <img src="images/9.png" />
+	    </div>
+	    <div id="b9" class="overlay">
+	      <img src="images/10.png" />
+	    </div>
+	    <div id="b10" class="overlay">
+	      <img src="images/left-thumb.png" />
+	    </div>
+	    <div id="b11" class="overlay">
+	      <img src="images/right-thumb.png" />
+	    </div>
+	    <div id="b12" class="overlay">
+	      <img src="images/up.png" />
+	    </div>
+	    <div id="b13" class="overlay">
+	      <img src="images/right.png" />
+	    </div>
+	    <div id="b14" class="overlay">
+	      <img src="images/down.png" />
+	    </div>
+	    <div id="b15" class="overlay">
+	      <img src="images/left.png" />
+	    </div>
+	    <div id="b16" class="overlay">
+	      <img src="images/analog.png" />
+	    </div>
+	    <div id="b17" class="overlay">
+	      <img src="images/motor-left.png" />
+	    </div>
+	    <div id="b18" class="overlay">
+	      <img src="images/motor-right.png" />
+	    </div>
+	  </div>
+
+	  <!-- analog joystick graphs -->
+	  <div> 
+	    <fieldset style="width: 130px; position: relative; top: 20px; left: 355px">
+	      <legend>Left Joystick</legend>
+	      <div style="height: 51px; line-height: 51px">
+	  x-axis <span id="left-x">waiting...</span><br>
+	      </div>
+	      <div style="height: 51px; line-height: 51px">
+		y-axis <span id="left-y">waiting...</span>
+	      </div>
+	    </fieldset>
+	    <fieldset style="width: 130px; position: relative; top: 50px; left: 355px">
+	      <legend>Right Joystick</legend>
+	      <div style="height: 51px; line-height: 51px">
+		x-axis <span id="right-x">waiting...</span><br>
+	      </div>
+	      <div style="height: 51px; line-height: 51px">
+	  y-axis <span id="right-y">waiting...</span>
+	      </div>
+	    </fieldset>
+	  </div>
+	  
+	</fieldset>
+      </div>
+      
+      <!-- mode table with animated sliding rows -->
+      <div>
+	<table style="border: 1px solid #161458; position: absolute; top: 10px; left: 540px; width: 460px; margin-right: 5px; border-collapse: collapse;">
+	  
+	  <!-- Driving Mode-->
+	  <tr id="drive-header" style="line-height: 40px">
+	    <th>
+	      <img src="images/drive-sign.png" style="padding-left:5px; height: 40px; float: left;">
+	      &nbsp;&nbsp;DRIVE</th>
+	  </tr>
+	  <tr>
+	    <td>
+	      <div id="drive-body" style="vertical-align:bottom; text-align: center;">          
+		<div style="position: relative; text-align: center; height: 70px; width: 230px;">
+		  
+		  <!-- turn left button -->
+		  <div class="button-on" style="top: 5px; left: 112px">
+		    <img src="images/left-on.png">
+		  </div>
+		  <div id="left-off" class="button-off" style="top: 5px; left: 112px">
+		    <img src="images/left-off.png" alt="left arrow" title="turn left" />
+		  </div>
+		  
+		  <!-- forward button -->
+		  <div  class="button-on" style="top: 5px; left: 202px">
+		    <img src="images/up-on.png">
+		  </div>
+		  <div id="up-off" class="button-off" style="top: 5px; left: 202px">
+		    <img src="images/up-off.png" alt="forward arrow" title="drive forward" />
+		  </div>
+		  
+		  <!-- turn right button -->
+		  <div class="button-on" style="top: 5px; left: 292px">
+		    <img src="images/right-on.png">
+		  </div>
+		  <div id="right-off" class="button-off" style="top: 5px; left: 292px">
+		    <img src="images/right-off.png" alt="right arrow" title="turn right" />
+		  </div>
+		</div>
+		<p>While this panel is open you can drive the robot using the '<b>A</b>', '<b>W</b>', &amp; '<b>D</b>' keys or click on the arrows above.
+	      </div>
+	    </td>
+	  </tr>
+	  <tr id="bump-header" style="line-height: 40px">
+	    <th>
+	      <img src="images/bump-sign.png" alt="Bump" style="padding-left:5px; height: 40px; float: left;">
+	      &nbsp;&nbsp;BUMP MODE
+	      <img id="bump-scan" src="images/mode-scan.gif" title="Running..." alt="Lollybot moving animation" style="padding:4px; float: right; visibility: hidden"></th>
+	  </tr>
+
+	  <!-- Bump Mode Panel -->
+	  <tr>
+	    <td  style="">
+	      <div id="bump-body" style="display:none; padding:5px; text-align:center;">
+		<fieldset style="background-color:#FFFFFF; margin:0px 30px 0px 30px;text-align:left; padding-left:20px;">
+		  <legend>Bump Sound</legend>
+		  <input id="bumpSoundCheckbox" type="checkbox" unchecked />
+		  <label for="bumpSoundCheckbox">Use bump sound</label><br><br>
+		  <div id="soundChooser">
+		    <label for="soundPicker" style="margin-left:8px; margin-right:8px">Sound file</label>
+		    <input type="file" id="soundPicker" title="Choose a sound file..." accept="audio/*" style="width: 215px" />
+		    <img id="playBumpSound" src="images/play.png" style="padding:0px 8px 4px 10px; vertical-align:middle;" alt="Play" title="Play"></img>
+		  </div>
+		</fieldset><br>
+		
+		Bump threshold +/- <input id="bumpThreshold" type="text" title="0..255" class="numeric" value="50" style="width:25px"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Bump axis 
+		<select id="bumpAxis" title="Choose the axis to use as the bump sensor">
+		  <option value="0">Left x-axis</option>
+		  <option value="1" selected>Left y-axis</option>
+		  <option value="2">Right x-axis</option>
+		  <option value="3">Right y-axis</option>
+		</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		<button id="bumpButton" title="Click to start/stop bump mode." style="width:60px;">Start</button><br><br>
+		(you must stop bump mode before you can open another panel!)
+	      </div>
+	    </td>
+	  </tr>
+	  
+	  <!-- Line Following Mode Panel -->
+	  <tr id="following-header" style="line-height: 40px">
+	    <th>
+	      <img src="images/following-sign.png" alt="Line following" style="padding-left:5px; height: 40px; float: left;">
+	      &nbsp;&nbsp;LINE FOLLOWING
+	      <img id="following-scan" src="images/mode-scan.gif" title="Running..." alt="Lollybot moving animation" style="padding:4px; float: right; visibility: hidden"></th>
+	  </tr>
+	  <tr>
+	    <td style="">
+	      <div id="following-body"  style="display: none; padding: 5px; text-align:center">
+	  <div style="float:left">
+	    <fieldset style="background-color:#FFFFFF; margin:0px 5px 0px 7px;text-align:left; padding-left:5px;">
+	      <legend>Left sensor</legend>
+	      White Level <input id="leftWhiteLevel" title="0..255" type="text" class="numeric" value="144" style="width: 30px; margin-left:15px"/>
+	      <button id="leftWhiteLevelButton" title="Click to use the current sensor level." style="margin-left:15px;">Detect</button><br>
+	      Black Level <input id="leftBlackLevel" title="0..255" type="text" class="numeric" value="112" style="width: 30px; margin-left:16px"/>
+	      <button id="leftBlackLevelButton" title="Click to use the current sensor level." style="margin-left:15px;">Detect</button><br>
+	      Choose axis
+	      <select id="leftSensorAxis" title="Choose the axis to use as the left line sensor" style="margin-left:10px; width:113px">
+		<option value="0">Left x-axis</option>
+		<option value="1">Left y-axis</option>
+		<option value="2" selected>Right x-axis</option>
+		<option value="3">Right y-axis</option>
+	      </select>
+	    </fieldset>
+	  </div>
+	  <div style="float:left">
+	    <fieldset style="background-color:#FFFFFF; margin:0px 5px 0px 5px;text-align:left; padding-left:5px;">
+	      <legend>Right sensor</legend>
+	      White Level <input id="rightWhiteLevel" title="0..255" type="text" class="numeric" value="144" style="width: 30px; margin-left:15px"/>
+	      <button id="rightWhiteLevelButton" title="Click to use the current sensor level." style="margin-left:15px;">Detect</button><br>
+	      Black Level <input id="rightBlackLevel" title="0..255" type="text" class="numeric" value="112" style="width: 30px; margin-left:16px"/>
+	      <button id="rightBlackLevelButton" title="Click to use the current sensor level." style="margin-left:15px;">Detect</button><br>
+	      Choose axis
+	      <select id="rightSensorAxis" title="Choose the axis to use as the right line sensor" style="margin-left:10px; width:113px">
+		<option value="0">Left x-axis</option>
+		<option value="1">Left y-axis</option>
+		<option value="2">Right x-axis</option>
+		<option value="3" selected>Right y-axis</option>
+	      </select>
+	    </fieldset><br>
+	  </div>
+	  <div style="clear:both"></div>
+	  Line colour:&nbsp;&nbsp;
+	  <input type="radio" name="lineColour" value="black" id="blackLine" checked>Black&nbsp;&nbsp;
+	  <input type="radio" name="lineColour" value="white" id="whiteLine">White
+	  <button id="followButton" title="Not yet implemented!" style="width:60px; margin-left:100px" disabled>Start</button>
+	  <br><br>
+	  (you must stop line following before you can open another panel!)
+	      </div>
+	    </td>
+	  </tr>
+	  
+	  <!-- This panel is for you to implement your own control mode! -->
+	  <tr id="new-header" style="line-height: 40px">
+	    <th>
+	      <img src="images/working-sign.png" alt="Road work sign" style="padding-left:5px; height: 40px; float: left;">
+	      &nbsp;&nbsp;YOUR MODE!
+	      <img id="new-scan" src="images/mode-scan.gif" title="Running..." alt="Lollybot moving animation" style="padding:4px; float: right; visibility: hidden"></th>
+	  </tr>
+	  <tr style="">
+	    <td  style="">
+	      <div id="new-body" style="display: none; padding: 5px; text-align:center"> 
+		Use this panel to start/stop your own Lollybot control mode.
+		<button id="newButton" title="Click to start/stop your mode." style="width:60px;">Start</button>
+		<br><br>
+		(you must stop this mode before you can open another panel!)
+	      </div>
+	    </td>
+	  </tr>
+	  
+	  <!-- Settings Panel -->
+	  <tr id="settings-header" style="line-height: 40px">
+	    <th>
+	      <img src="images/settings-sign.png" style="padding-left:5px; height: 40px; float: left;">
+	      &nbsp;&nbsp;SETTINGS</th>
+    </tr>
+	  <tr>
+	    <td  style="">
+	      <div id="settings-body" style="display: none; padding: 5px 5px 5px 15px;"> 
+		Server URL <input id="serverURL" style="margin-right:10px;" type="text" value="http://localhost" />
+		Port <input id="serverPort" title="0..65535" type="text" class="numeric" value="8075" style="width: 50px"/>
+		<button id="connectButton" title="Click to connect to the server." style="margin-left:10px;">Connect</button><br><br>
+		<input id="loggingCheckbox" type="checkbox"  unchecked />
+		<label for="loggingCheckbox">Enable Logging</label>
+		<input id="swapCheckbox" type="checkbox" style="margin-left:40px;" unchecked />
+		<label for="swapCheckbox">Swap Motors</label><br>
+	      </div>
+	    </td>
+	  </tr>
+	  
+	  <!-- Information Panel -->
+	  <tr id="info-header" style="line-height: 40px">
+	    <th>
+	      <img src="images/information-sign.png" alt="Information" style="padding-left:5px; height: 40px; float: left;">
+	      &nbsp;&nbsp;ABOUT</th>
+	  </tr>
+	  <tr style="">
+	    <td>
+	      <div id="info-body"  style="display: none; padding: 5px;">
+		<p>This is version 0.1.0 of the telemetry & control software for <a href="http://www.tomtilley.net/projects/suckerbot/">Lollybot</a> (formerly known as "Suckerbot") - one of the winning entries in the <a href="http://www.robotics-africa.org">African Robotics Network (AFRON)</a> <a href="http://www.robotics-africa.org/afron-design-challenges.html">&quot;10 Dollar Robot&quot; Design Challenge</a>.
+		<p>You can download a copy of the software so you can run it off-line <a href="http://www.tomtilley.net/projects/suckerbot/#software">here</a>.
+		<p>The software is written in HTML5 and JavaScript. It also uses the following plug-ins/tools:
+		  <ul>
+		    <li><a href="http://jquery.com/">jQuery</a> - which makes JavaScript easier to use.</li>
+		    <li><a href="http://nodejs.org">Node.js</a> - the server side JavaScript engine.</li>
+		    <li><a href="https://github.com/hanshuebner/node-hid">node-hid</a> - for USB communication with the robot.</li>
+		    <li><a href="http://socket.io/">Socket.IO</a> - for communication between the browser and the server.</li>
+		    <li><a href="https://npmjs.org/package/commander">commander.js</a> - handles server command-line options.</li>
+		    <li><a href="http://omnipotent.net/jquery.sparkline">jQuery Sparklines plugin</a> - for the analog joystick graphs.</li>
+		  </ul>
+	      </div>
+	    </td>
+	  </tr>
+	  
+	</table>
+      </div>
+      
+    </div>
+</body>
+
+</html>
