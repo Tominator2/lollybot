@@ -1,0 +1,11 @@
+#summary Building the node-hid plug-in for Ubuntu 12.04 LTS
+#labels Featured,Phase-Deploy
+
+= Introduction =
+
+This page describes how I built the node-hid plugin for Node.js on Ubuntu 12.04 LTS Desktop edition.
+
+
+= Details =
+
+This page will be updated shortly.
