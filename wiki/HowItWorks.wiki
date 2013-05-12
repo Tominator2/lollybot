@@ -12,7 +12,7 @@ The solution was to use <a href="http://nodejs.org">Node.js</a> - a stand alone 
 
 = Details =
 
-The software uses a plug-in for Node.js called <a href="https://github.com/hanshuebner/node-hid">node-hid<a> that can communicate with USB devices like keyboards, mice, bar-code readers, joysticks, etc.  Another plug-in called <a href="http://socket.io/">Socket.IO</a> is used to send telemetry data and receive control signals to a web-interface written in HTML5 + JavaScript (see the image below).  
+The software uses a plug-in for Node.js called <a href="https://github.com/hanshuebner/node-hid">node-hid<a> that can communicate with USB devices like keyboards, mice, bar-code readers, joysticks, etc.  Another plug-in called <a href="http://socket.io/">Socket.IO</a> is used to send telemetry data and receive control signals to/from a web-interface written in HTML5 + JavaScript (see the image below).  
 
 http://lollybot.googlecode.com/files/local.jpg
 
