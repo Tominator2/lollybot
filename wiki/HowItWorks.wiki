@@ -3,7 +3,11 @@
 
 = Introduction =
 
-Add your content here.
+The original version of the control and telemetry code for Lollybot grew out of code I had written for various <a href="http://www.tomtilley.net/projects/">projects</a> that used hacked joysticks.  The code was written in Object Pascal using Delphi.  Unfortunately, there are currently no free versions of Delphi available (although there is <a href="http://www.lazarus.freepascal.org/">Lazarus</a>) so students wanting to build or modify the code for themselves would have to pay for a development  environment.  In addition the code was only available for the Windows platform.
+
+My teenage son had been learning some JavaScript in an after-school class and suggested that I make an HTML5/JavaScript version of the code that could run in a web-browser.  I thought this would be a great idea - the tools to develop or modify the code would be free and it would be cross-platform.  Unfortunately, web-browsers are sandboxed so the browser wouldn't be able to communicate with the robot via USB.   
+
+The solution was to use <a href="http://nodejs.org">Node.js</a> - a stand alone version of Google's <a href="http://en.wikipedia.org/wiki/V8_%28JavaScript_engine%29">V8 JavaScript engine</a> that could talk to the robot via USB and send/receive data from a web-page.
 
 
 = Details =
