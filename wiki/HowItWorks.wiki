@@ -27,6 +27,6 @@ The Node.js server code is in the file '<a href="http://code.google.com/p/lollyb
 = Client Code =
 
 The HTML mark-up, JavaScript code, and CSS layout for the web-interface client are contained in three files:
-* '<a href="http://code.google.com/p/lollybot/source/browse/trunk/+lollybot/index.html">index.html</a>',  
-* '<a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/scripts/lollybot-0.1.0.js"></a>' in the 'scripts/' , and
-* '<a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/css/lollybot.css">lollybot.css</a> in the 'css/' directory' 
+  * <a href="http://code.google.com/p/lollybot/source/browse/trunk/+lollybot/index.html">index.html</a>,  
+  * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/scripts/lollybot-0.1.0.js">lollybot-0.1.0.js</a> in the 'scripts/' directory, and
+  * '<a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/css/lollybot.css">lollybot.css</a> in the 'css/' directory' 
