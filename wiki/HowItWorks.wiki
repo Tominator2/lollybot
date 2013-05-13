@@ -16,7 +16,7 @@ The software uses a plug-in for Node.js called <a href="https://github.com/hansh
 
 http://lollybot.googlecode.com/files/local.jpg
 
-Both Node.js and the web-browser can be run on the same machine but it is also possible to connect to a Node.js server running on another machine over a network (via the "Settings" panel on the Lollybot software).  Node.js is available for Windows, Linux, and Mac OS and the web-interface will run in any modern HTML5 compliant browser so this provides an environment for Lollybot that is cross-platform and the client can be running across a network. See the image below.
+Both Node.js and the web-browser can be run on the same machine but it is also possible to connect to a Node.js server running on another machine over a network (via the "Settings" panel on the Lollybot software).  Node.js is available for Windows, Linux, and Mac OS and the web-interface will run in any modern HTML5 compliant browser so this provides an environment for Lollybot that is cross-platform, free, and the client can be running across a network. See the image below.
 
 http://lollybot.googlecode.com/files/distributed.jpg
 
@@ -29,7 +29,7 @@ The Node.js server code is in the file '<a href="http://code.google.com/p/lollyb
 The HTML mark-up, JavaScript code, and CSS layout for the web-interface client are contained in three files:
   * <a href="http://code.google.com/p/lollybot/source/browse/trunk/+lollybot/index.html">index.html</a>,  
   * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/scripts/lollybot-0.1.0.js">lollybot-0.1.0.js</a> in the 'scripts/' directory, and
-  * '<a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/css/lollybot.css">lollybot.css</a> in the 'css/' directory' 
+  * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/css/lollybot.css">lollybot.css</a> in the 'css/' directory' 
 The JavaScript code also makes use of:
   * <a href="http://jquery.com/">jQuery</a> which abstracts over browser differences and makes JavaScript easier to use,
   * the <a href="http://omnipotent.net/jquery.sparkline/#s-about">jQuery.Sparklines</a> plugin which is used to draw the analog joystick graphs, and
