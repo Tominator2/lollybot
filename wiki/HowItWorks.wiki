@@ -1,5 +1,5 @@
 #summary This page provides an overview of how the software works.
-#labels Phase-Design
+#labels Phase-Design,Featured
 
 = Introduction =
 
