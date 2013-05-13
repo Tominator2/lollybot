@@ -167,7 +167,7 @@ var P_ID = program.joystick[1]; // USB Product ID
 // Check out the USB joystick that is the robot
 //
 // This function will exit the program if no joysticks are found, use
-// a joystick if only one ius connected, and give you details before
+// a joystick if only one is connected, and give you details before
 // exiting if more than one joystick is found.  It also checks for
 // valid USB device details on the command line
 if (V_ID == 0 || P_ID == 0 || isNaN(V_ID) || isNaN(P_ID)) {
@@ -183,7 +183,7 @@ if (V_ID == 0 || P_ID == 0 || isNaN(V_ID) || isNaN(P_ID)) {
 	
 	// Check to see if we have appropriate permissions!
 	if (!usbDev.product) {
-		console.error('Cannot access USB device properties!\nIf you are running on Unix-like check that you have appropriate permissions (or try \'sudo node lollybot-server.js\'');
+		console.error('Cannot access USB device properties!\nIf you are running on Unix-like system check that you have appropriate permissions (or try \'sudo node lollybot-server.js\'');
 		process.exit(1);	
 	}
 
