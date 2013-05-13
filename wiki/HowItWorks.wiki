@@ -20,8 +20,13 @@ Both Node.js and the web-browser can be run on the same machine but it is also p
 
 http://lollybot.googlecode.com/files/distributed.jpg
 
-= Server Code
+= Server Code =
 
 The Node.js server code is in the file '<a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/lollybot-server.js">lollybot-server.js</a>'.  It also relies on another plug-in called <a href="https://npmjs.org/package/commander">Commander.js</a> which is used to read command-line options for the server. 
 
 = Client Code =
+
+The HTML mark-up, JavaScript code, and CSS layout for the web-interface client are contained in three files:
+* '<a href="http://code.google.com/p/lollybot/source/browse/trunk/+lollybot/index.html">index.html</a>',  
+* '<a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/scripts/lollybot-0.1.0.js"></a>' in the 'scripts/' , and
+* '<a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/css/lollybot.css">lollybot.css</a> in the 'css/' directory' 
