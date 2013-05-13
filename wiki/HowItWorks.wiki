@@ -32,5 +32,5 @@ The HTML mark-up, JavaScript code, and CSS layout for the web-interface client a
   * '<a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/css/lollybot.css">lollybot.css</a> in the 'css/' directory' 
 The JavaScript code also makes use of:
   * <a href="http://jquery.com/">jQuery</a> which abstracts over browser differences and makes JavaScript easier to use,
-  * the <a href="jQuery.Sparklines"></a> plugin which is used to draw the analog joystick graphs, and
-  * the client-side code for <a href="">Socket.IO</a>.
+  * the <a href="http://omnipotent.net/jquery.sparkline/#s-about">jQuery.Sparklines</a> plugin which is used to draw the analog joystick graphs, and
+  * the client-side code for <a href="http://socket.io/">Socket.IO</a>.
