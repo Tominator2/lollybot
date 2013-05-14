@@ -34,7 +34,6 @@
 // - increased by 5 pixels - need to test this!
 //
 // - implemet the line following code
-// - add a clearCommandQueue() function
 //
 
 $(function() {
