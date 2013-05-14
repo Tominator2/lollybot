@@ -3,7 +3,7 @@
 
 = Introduction =
 
-The <a href="http://code.google.com/p/suckerbot/">original version of the control and telemetry code</a> for Lollybot grew out of code I had written for various <a href="http://www.tomtilley.net/projects/">projects that used hacked joysticks</a>.  The code was written in Object Pascal using Delphi.  Unfortunately, there are currently no free versions of Delphi available (although there is <a href="http://www.lazarus.freepascal.org/">Lazarus</a>) so students wanting to build or modify the code for themselves would have to pay for a development  environment.  In addition this code will only run on Windows machines.
+The <a href="http://code.google.com/p/suckerbot/">original version of the control and telemetry code</a> for Lollybot grew out of code I had written for various <a href="http://www.tomtilley.net/projects/">projects that used hacked joysticks</a>.  The code was written in Object Pascal using Delphi.  Unfortunately, there are currently no free versions of Delphi available (although <a href="http://www.lazarus.freepascal.org/">Lazarus</a> is a possible alternative) so students wanting to build or modify the code for themselves would have to pay for a development  environment.  In addition this code will only run on Windows machines.
 
 My teenage son had been learning some JavaScript in an after-school class and suggested that I make an HTML5/JavaScript version of the code that could run in a web-browser.  I thought this would be a great idea - the tools to develop or modify the code would be free and it would be cross-platform.  Unfortunately, web-browsers are sandboxed so the browser wouldn't be able to communicate with the robot via USB.   
 
