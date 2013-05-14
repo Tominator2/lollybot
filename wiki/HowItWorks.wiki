@@ -14,12 +14,10 @@ The solution was to use <a href="http://nodejs.org">Node.js</a> - a stand alone 
 
 The software uses a plug-in for Node.js called <a href="https://github.com/hanshuebner/node-hid">node-hid<a> that can communicate with USB devices like keyboards, mice, bar-code readers, joysticks, etc. Node-hid is a JavaScript wrapper for the <a href="http://www.signal11.us/oss/hidapi/">HID API</a> library. Another plug-in called <a href="http://socket.io/">Socket.IO</a> is used to send telemetry data and receive control signals to/from a web-interface written in HTML5 + JavaScript (see the image below).  
 
-http://lollybot.googlecode.com/files/local.jpg
 http://lollybot.googlecode.com/files/how-local.jpg
 
 Both Node.js and the web-browser can be run on the same machine but it is also possible to connect to a Node.js server running on another machine over a network (via the "Settings" panel on the Lollybot software).  Node.js is available for Windows, Linux, and Mac OS and the web-interface will run in any modern HTML5 compliant browser so this provides an environment for Lollybot that is cross-platform, free, and the client can be running across a network. See the image below.
 
-http://lollybot.googlecode.com/files/distributed.jpg
 http://lollybot.googlecode.com/files/how-distributed.jpg
 
 = Server Code =
