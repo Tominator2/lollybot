@@ -1,6 +1,6 @@
 Lollybot HTML5 + JavaScript Telemetry & Control 
-Version 0.1.0
-May 11, 2013
+Version 0.1.1
+May 14, 2013
 
 This is the software for Lollybot (formerly known as "Suckerbot") my
 entry in the African Robotics Network (AFRON) $10 Robot Design
@@ -66,7 +66,12 @@ Getting Started - Windows:
    for windows ('Hid.node') that has been tested on WinXP and Windows 7
    so you don't need to install it.
 
-4) Connect the robot's USB cable to the computer and start the server by typing:
+4) Connect the robot's USB cable to the computer then change into the
+   directory containing this README file, e.g.:
+
+     cd lollybot\
+
+   Start the server by typing:
 
      node lollybot-server
 
@@ -104,7 +109,7 @@ Getting Started - Mac OS/Linux:
 
      npm install node-hid
 
-   For addittional help see:
+   For additional help see:
 
      https://github.com/hanshuebner/node-hid
      http://code.google.com/p/lollybot/wiki/LinuxBuild
@@ -118,13 +123,18 @@ Getting Started - Mac OS/Linux:
 
      var HID = require('node-hid');
 
-5) Connect the robot's USB cable to the computer and start the server by typing:
+5) Connect the robot's USB cable to the computer then change into the
+   directory containing this README file, e.g.:
+
+     cd lollybot/
+
+   Start the server by typing:
 
      sudo node lollybot-server
 
    and enter the the required password.
 
-   (for a list of available options type: sudo node lollybot-server --help)
+   (for a list of available options type: 'sudo node lollybot-server --help')
 
 6) Open the 'index.html' file in a modern web browser (see
    'requirements' above) or point your browser at: 
@@ -157,7 +167,7 @@ TROUBLESHOOTING:
     sudo node lollybot-server
 
 - The "bump" and "line following" modes require the joystick to be in
-  "analog" mode - press teh "Analog" button on the joystick make sure
+  "analog" mode - press the "Analog" button on the joystick make sure
   the red LED is lit.
 
 - You start and stop the 'bump', 'line following', or 'your mode' modes
@@ -177,5 +187,9 @@ TROUBLESHOOTING:
 
 CHANGE LOG:
 -----------
+v0.1.1
+- Changed the name of the client JavaScript file to loolybot-control
+- Added a new clearQueue() command.
+
 v0.1.0
 - This is the initial release!
