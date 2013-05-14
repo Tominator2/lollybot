@@ -188,7 +188,7 @@ TROUBLESHOOTING:
 CHANGE LOG:
 -----------
 v0.1.1
-- Changed the name of the client JavaScript file to loolybot-control
+- Changed the name of the client JavaScript file to lollybot-control
 - Added a new clearQueue() command.
 
 v0.1.0
