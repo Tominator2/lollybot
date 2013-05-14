@@ -1,6 +1,6 @@
 /**
  *
- *   lollybot-0.1.1.js
+ *   lollybot-control.js
  *
  *   Copyright 2013 Thomas Tilley.
  *   http://www.tomtilley.net/projects/suckerbot/
