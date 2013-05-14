@@ -683,10 +683,6 @@ $(function() {
     // milliseconds.  It returns true if the command could be started
     // and false if the motors were already running in which case the
     // request is ignored.
-    // 
-    // Note that at the moment the display isn't updated when the
-    // motors are run using this method!
-
     function runMotors(leftPower, rightPower, milliSec) {
 	if (leftMotorPower > 0 || rightMotorPower > 0) {
 	    return false; // motors are already running
