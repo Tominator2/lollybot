@@ -1,6 +1,6 @@
 /**
  *
- *   lollybot-0.1.0.js
+ *   lollybot-0.1.1.js
  *
  *   Copyright 2013 Thomas Tilley.
  *   http://www.tomtilley.net/projects/suckerbot/
@@ -539,10 +539,24 @@ $(function() {
 	    changeMode("Undefined");
 	    $("#newButton").html('Start');			    
 	    $("#new-scan").css("visibility", "hidden"); // hide anim
+	    clearQueue(); // clear any commands currently queued
 	}
     });
 
     
+    function queueTest() {
+	// push some commands onto the queue and then execute them
+	addToQueue(function(){playBumpSound()});
+	addToQueue(function(){turnLeft(1500)});
+	addToQueue(function(){playBumpSound()});
+	addToQueue(function(){turnRight(1500)});
+	addToQueue(function(){playBumpSound()});
+	addToQueue(function(){moveForward(1500)});
+	addToQueue(function(){playBumpSound()});
+	nextQueueCommand();  // process the queue
+    }
+
+
     // Audio
     
     // Test the bump sound
@@ -638,6 +652,14 @@ $(function() {
 	//commandQueue.push(function(){fn});
 	commandQueue.push(fn);
     }
+
+
+    // This command empties the queue.  Any commands that have not
+    // already started running will not be run.
+    function clearQueue() {
+	commandQueue.length = 0;
+    }
+
 
 
     // drive forward for 'milliSec' milliseconds
