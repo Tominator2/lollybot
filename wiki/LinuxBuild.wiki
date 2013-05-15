@@ -8,4 +8,71 @@ This page describes how I built the node-hid plugin for Node.js on Ubuntu 12.04 
 
 = Details =
 
-This page will be updated shortly.
+I installed Ubuntu 12.04 LTS on my machine, connected to the internet, and opened a terminal.  The first thing we need to do is install some development tools:
+
+{{{
+sudo apt-get update
+sudo apt-get install g++ curl
+sudo apt-get install libssl-dev apache2-utils
+sudo apt-get install build-essential
+sudo apt-get install pkg-config
+}}}
+
+It is possible to install the latest version of Node.js from a package using 'apt-get' but the current version of the Lollybot code requires Node.js version 0.9.1.  Download the Node.js v0.9.1 source tarball, extract, and install it:
+
+{{{
+wget http://nodejs.org/dist/v0.9.1/node-v0.9.1.tar.gz
+tar -xf node-v0.9.1.tar.gz
+cd node-v0.9.1/
+./configure
+sudo make install
+node --version
+}}}
+
+If all is well it should report the version number to you.
+
+Next we need to install the additional packages that Node.js needs
+using the Node Package Manager 'npm'.  Packages are installed locally
+by default (although there is a gloabl option) so you should change
+into the 'lollybot/' directory (download the Lollybot source and unzip it if you haven't already):
+
+{{{
+wget http://lollybot.googlecode.com/files/lollybot-v0.1.1.zip
+gunzip lollybot-v0.1.1.zip
+cd lollybot/
+npm install commander
+npm install socket.io
+npm install node-gyp -g
+}}}  
+
+The node-hid plug-in that is used to talk to the joystick via USB needs to be built for each platform (although a pre-built version for Windows is distributed with the Lollybot software). We need to install git so it can grab the sources it needs (for the HID-API library) and there are some additional dependencies for the Linux version as well as (see https://github.com/hanshuebner/node-hid for more details): 
+
+{{{
+sudo apt-get install git-core
+sudo apt-get install libudev-dev
+sudo apt-get install libusb-1.0-0-dev 
+}}}
+
+Now you can install node-hid:
+
+{{{
+npm install node-hid
+}}}
+
+Assuming that everything installed correctly you should be ready to go.  As mentioned above the Lollybot software comes with a pre-built version of node-hid that is contained in the 'windows/' directory.  Before you can run the Lollybot server you must comment out this line in the file 'lollybot-server.js':
+
+{{{
+// var HID = require('./windows/HID'); 
+}}}
+
+and uncomment this line so it uses the version of node-hid you just built:
+
+{{{
+var HID = require('node-hid');
+}}}
+
+Note that to be able to check out USB devices you must be running as root.  To start the Lollybot server type:
+
+{{{
+sudo node lollybot-server 
+}}}
