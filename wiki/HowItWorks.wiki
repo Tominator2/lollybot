@@ -22,7 +22,7 @@ http://lollybot.googlecode.com/files/how-distributed.jpg
 
 = Server Code =
 
-The Node.js server code is in the file '<a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/lollybot-server.js">lollybot-server.js</a>'.  It also relies on another plug-in called <a href="https://npmjs.org/package/commander">Commander.js</a> which is used to read command-line options for the server. 
+The Node.js server code is in the file '<a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/lollybot-server.js">lollybot-server.js</a>'.  In addition to node-hid and Socket.io, it also relies on another plug-in called <a href="https://npmjs.org/package/commander">Commander.js</a> which is used to read command-line options for the server. 
 
 = Client Code =
 
