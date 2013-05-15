@@ -92,14 +92,22 @@ Getting Started - Windows:
 
 Getting Started - Mac OS/Linux:
 -------------------------------
-1) Install Node.js version 0.9.1 (available at http://nodejs.org/dist/v0.9.1/)
 
-2) Open a shell and install the required plug-ins by typing:
+1) Install Node.js version 0.9.1 (available at http://nodejs.org/dist/v0.9.1/)
+   (see: http://code.google.com/p/lollybot/wiki/LinuxBuild for more details
+   about installing Node.js with Ubuntu 12.04)
+
+2) Open a terminal and then change into the directory containing this
+   README.txt file, e.g.:
+
+     cd lollybot/
+
+3) Install the required plug-ins by typing:
 
      npm install commander
      npm install socket.io
 
-3) Before installing the node-hid plug-in make sure you also have:
+4) Before installing the node-hid plug-in make sure you also have:
 
      git (Mac OS & Linux)
      libudev-dev (Linux only) 
@@ -114,7 +122,7 @@ Getting Started - Mac OS/Linux:
      https://github.com/hanshuebner/node-hid
      http://code.google.com/p/lollybot/wiki/LinuxBuild
 
-4) Comment out this line (for the pre-built Windows version of
+5) Comment out this line (for the pre-built Windows version of
    node-hid) in the 'lollybot-server.js' file:
 
      // var HID = require('./windows/HID'); 
@@ -123,25 +131,21 @@ Getting Started - Mac OS/Linux:
 
      var HID = require('node-hid');
 
-5) Connect the robot's USB cable to the computer then change into the
-   directory containing this README file, e.g.:
-
-     cd lollybot/
-
-   Start the server by typing:
+6) Connect the robot's USB cable to the computer and start the server
+   by typing:
 
      sudo node lollybot-server
 
-   and enter the the required password.
+   then enter the the required password (for 'sudo').
 
    (for a list of available options type: 'sudo node lollybot-server --help')
 
-6) Open the 'index.html' file in a modern web browser (see
+7) Open the 'index.html' file in a modern web browser (see
    'requirements' above) or point your browser at: 
 
      http://tomtilley.net/projects/suckerbot/html5/
 
-7) The Lollybot's speech bubble at the top of the screen should change
+8) The Lollybot's speech bubble at the top of the screen should change
    from a red cross to a green tick when you are connected to the
    server.  The robot is initially in driving mode but you can change
    modes by clicking the panels on the right side of the screen.  If
