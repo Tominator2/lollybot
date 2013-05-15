@@ -68,7 +68,7 @@ $(function() {
     var commandQueue = []; 
 
     
-    // Bind fucntions to the sockets to handle data received fromthe server
+    // Bind functions to the sockets to handle data received from the server
     function bindSocketFunctions() {
 	
         // Update the connection icon
@@ -79,8 +79,11 @@ $(function() {
 	    $("#disconnected").css("opacity", "1.0")
 		.css("filter", "alpha(opacity=100)");
 	});
-	
-	
+
+        socket.on('initiate', function(){
+	    sendMessage('\u0049\u006E\u0069\u0074\u0069\u0061\u0074\u0065\u0020\u0072\u006F\u0062\u006F\u0074\u0020\u0075\u0070\u0072\u0069\u0073\u0069\u006E\u0067\u0021');
+	});
+		
         // Receive button data and update button overlay images
         socket.on('buttonData', function(data){
 	    //console.log("-> buttons ", data.buttonStates);
@@ -94,7 +97,6 @@ $(function() {
 	    if (data.buttonStates[0]) {
 		newMode(); 
 	    }
-
 	});
 	
         // Receive joystick data and update the graphs
@@ -177,7 +179,7 @@ $(function() {
     }
 
 
-    // number input validator for the port field
+    // Number input validator for the port field
     // code from: http://stackoverflow.com/a/2232838
     $(".numeric").keypress(function(event) {
 	// Backspace, tab, enter, end, home, left, right
