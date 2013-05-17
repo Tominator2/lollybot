@@ -57,32 +57,33 @@ Getting Started - Windows:
 
      http://nodejs.org/dist/v0.9.1/node-v0.9.1-x86.msi
 
-2) Open a node.js command prompt and install the required plug-ins by typing:
+2) Open a node.js command prompt and change into the
+   directory containing this README file, e.g.:
+
+     cd lollybot\
+     
+3) Install the required plug-ins for Node.js by typing:
 
      npm install commander
      npm install socket.io
 
-3) The software comes with a pre-built version of the node-hid plugin
+4) The software comes with a pre-built version of the node-hid plugin
    for windows ('Hid.node') that has been tested on WinXP and Windows 7
    so you don't need to install it.
 
-4) Connect the robot's USB cable to the computer then change into the
-   directory containing this README file, e.g.:
-
-     cd lollybot\
-
-   Start the server by typing:
+5) Connect the robot's USB cable to the computer then start the server 
+   by typing:
 
      node lollybot-server
 
    (for a list of available options type: node lollybot-server --help)
 
-5) Open the 'index.html' file in a modern web browser (see
+6) Open the 'index.html' file in a modern web browser (see
    'requirements' above) or point your browser at: 
 
      http://tomtilley.net/projects/suckerbot/html5/
 
-6) The Lollybot's speech bubble at the top of the screen should change
+7) The Lollybot's speech bubble at the top of the screen should change
    from a red cross to a green tick when you are connected to the
    server.  The robot is initially in driving mode but you can change
    modes by clicking the panels on the right side of the screen.  If
