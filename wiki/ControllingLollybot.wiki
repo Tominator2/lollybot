@@ -35,18 +35,18 @@ To add your own code you will need to <a href="http://code.google.com/p/lollybot
 
 To add code that is run when you press the "Start" button and stops when you press the "Stop" button you will need to
 
-{{
+{{{
 // Add code to be run when the "Start" button is pressed here!
-}}
+}}}
 
 ==2. Adding Code That Runs When a Button is Pressed==
 
-{{
+{{{
 ﻿// Add code that responds to button presses here!
-}}
+}}}
 
 ==3. Adding Code That Runs When a Thumbstick "Moves"==
 
-{{
+{{{
 // Add code that responds to thumbstick "movement" here!
-}}
+}}}
