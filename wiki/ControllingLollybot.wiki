@@ -1,0 +1,52 @@
+#summary This page will give you a brief overview of how to get started writing your own robot control mode.
+#labels Featured,Phase-Implementation
+
+= Introduction =
+
+Lollybot's control software consists of two parts - a server that
+simply handles communication with the the robot and a client web-page
+that displays <a href="http://en.wikipedia.org/wiki/Telemetry">telemetry</a>
+information and sends commands for the robot to the server.  You can
+find more information about how it works on <a href="http://code.google.com/p/lollybot/wiki/HowItWorks">this
+page</a>.
+
+The web-page is implemented using three files:
+
+  * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/index.html">index.html</a> which contains the HTML code for the page. You can modify this file if you need to add any new buttons, input fields, or interface controls.  The existing page includes a panel to help you get started implementing your own mode that contains a Start/Stop button:
+
+    http://lollybot.googlecode.com/files/your-mode.png
+
+  * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/scripts/lollybot-control.js">lollybot-control.js</a> in the 'scripts/' directory which contains the JavaScript code to control the robot as well as code for things like animating the control panels.  This is where you can add your own code to control Lollybot's behaviour.
+
+  * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/css/lollybot.css">lollybot.css</a> some <a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a> code used to describe the style of some of the web-page elements.
+
+
+= Writing Your Own Control Mode =
+
+There are three main ways to add your own code to control Lollybot - code that will run:
+
+  # As soon as you press the "Start" button on the "Your Mode!" panel,
+  # When one of Lollybot's buttons is pressed, or
+  # When Lollybot's thumbsticks (which are usually wired to sensors) "move".
+
+TO add your own code you will need to <a href="http://code.google.com/p/lollybot/downloads/list">download Lollybot's control and telemetry software</a> and modify the 'lollybot-control.js' JavaScript file which is in the 'scripts/' directory. 
+
+==1. Adding Code That Runs When You Press the "Start" Button==
+
+To add code that is run when you press the "Start" button and stops when you press the "Stop" button you will need to
+
+{{
+// Add code to be run when the "Start" button is pressed here!
+}}
+
+==2. Adding Code That Runs When a Button is Pressed==
+
+{{
+﻿// Add code that responds to button presses here!
+}}
+
+==3. Adding Code That Runs When a Thumbstick "Moves"==
+
+{{
+// Add code that responds to thumbstick "movement" here!
+}}
