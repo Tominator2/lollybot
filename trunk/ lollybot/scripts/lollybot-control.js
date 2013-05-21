@@ -91,8 +91,9 @@ $(function() {
 		buttonOverlay("#b" + i, data.buttonStates[i]); 
 	    }
 	    
-	    // button reading example
-	    // For exaample, you could call your own method to do something if the
+	    // Add code that responds to button presses here!
+      // 
+	    // For example, you could call your own method to do something if the
 	    // Button1 is pressed on the joystick:
 	    if (data.buttonStates[0]) {
 		newMode(); 
@@ -112,6 +113,9 @@ $(function() {
 	    } else if (mode == 'Following') {
 		follow();
 	    } else if (mode == 'New') {
+       
+       // Add code that responds to thumbstick "movement" here!
+       
 		newMode();
 	    }
 	});
@@ -507,11 +511,11 @@ $(function() {
 	if (mode == "Undefined"){
 	    changeMode("Bump");
 	    $("#bumpButton").html('Stop');
-	    $("#bump-scan").css("visibility", "visible"); // hide anim
+	    $("#bump-scan").css("visibility", "visible"); // show animation
 	} else if (mode == "Bump"){
 	    changeMode("Undefined");
 	    $("#bumpButton").html('Start');	
-	    $("#bump-scan").css("visibility", "hidden"); // hide anim
+	    $("#bump-scan").css("visibility", "hidden"); // hide animation
 	}
     });
     
@@ -521,11 +525,11 @@ $(function() {
 	if (mode == "Undefined"){
 	    changeMode("Following");
 	    $("#followButton").html('Stop');			    
-	    $("#following-scan").css("visibility", "visible"); // hide anim
+	    $("#following-scan").css("visibility", "visible"); // show animation
 	} else if (mode == "Following"){
 	    changeMode("Undefined");
 	    $("#followButton").html('Start');			    
-	    $("#following-scan").css("visibility", "hidden"); // hide anim
+	    $("#following-scan").css("visibility", "hidden"); // hide animation
 	}
     });
     
@@ -535,11 +539,14 @@ $(function() {
 	if (mode == "Undefined"){
 	    changeMode("New");
 	    $("#newButton").html('Stop');			    
-	    $("#new-scan").css("visibility", "visible"); // hide anim
+	    $("#new-scan").css("visibility", "visible"); // show animation
+       
+       // Add code to be run when the "Start" button is pressed here!
+       
 	} else if (mode == "New"){
 	    changeMode("Undefined");
 	    $("#newButton").html('Start');			    
-	    $("#new-scan").css("visibility", "hidden"); // hide anim
+	    $("#new-scan").css("visibility", "hidden"); // hide animation
 	    clearQueue(); // clear any commands currently queued
 	}
     });
