@@ -12,13 +12,13 @@ page</a>.
 
 The web-page is implemented using three files:
 
-  * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/index.html">index.html</a> which contains the HTML code for the page. You can modify this file if you need to add any new buttons, input fields, or interface controls.  The existing page includes a panel to help you get started implementing your own mode that contains a Start/Stop button:
+  * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/index.html">index.html</a> which is the HTML code for the page. You can modify this file if you need to add any new buttons, input fields, or interface controls.  The existing page includes a panel to help you get started implementing your own mode that contains a Start/Stop button:
 
     http://lollybot.googlecode.com/files/your-mode.png
 
   * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/scripts/lollybot-control.js">lollybot-control.js</a> in the 'scripts/' directory which contains the JavaScript code to control the robot as well as code for things like animating the control panels.  This is where you can add your own code to control Lollybot's behaviour.
 
-  * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/css/lollybot.css">lollybot.css</a> some <a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a> code used to describe the style of some of the web-page elements.
+  * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/css/lollybot.css">lollybot.css</a> which contains <a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a> code used to describe the style of some of the web-page elements.
 
 
 = Writing Your Own Control Mode =
@@ -33,20 +33,78 @@ To add your own code you will need to <a href="http://code.google.com/p/lollybot
 
 ==1. Adding Code That Runs When You Press the "Start" Button==
 
-To add code that is run when you press the "Start" button and stops when you press the "Stop" button you will need to
-
+To add code that is run when you press the "Start" button and stops when you press the "Stop" button, find this comment in 'lollybot-control.js':
 {{{
 // Add code to be run when the "Start" button is pressed here!
 }}}
 
+To be expanded...
+
 ==2. Adding Code That Runs When a Button is Pressed==
 
+To add code that is run in response to a button press, find this comment in 'lollybot-control.js':
 {{{
 ﻿// Add code that responds to button presses here!
 }}}
 
+To be expanded...
+
 ==3. Adding Code That Runs When a Thumbstick "Moves"==
 
+To add code that is run when a thumbstick moves or a sensor changes value, find this comment in 'lollybot-control.js':
 {{{
 // Add code that responds to thumbstick "movement" here!
 }}}
+
+To be expanded...
+
+
+=Controlling the Motors=
+
+To be expanded...
+
+moveForward(1500)
+
+turnLeft(1500)
+
+turnRight(1500)
+
+runMotors(0, 255, milliSec)
+
+stopMotors() 
+
+leftMotorPower  = 255; // 0..255
+
+rightMotorPower = 255; // 0..255
+
+sendMotorPower();
+
+
+
+=Executing a List of Commands=
+
+To be expanded...
+
+{{{
+addToQueue(function(){turnLeft(1500)});
+addToQueue(function(){turnRight(1500)});
+addToQueue(function(){moveForward(1500)});
+
+nextQueueCommand();  // process the queue
+}}}
+
+pauseQueue(milliSec);
+
+clearQueue(); 
+
+
+
+=Other Useful Commands=
+
+To be expanded...
+
+playBumpSound()
+
+sendMessage(text); 
+
+Also console logging.
