@@ -49,6 +49,16 @@ $(function() {
     
     var swapMotors = false;
     
+    // Array to store the button states where:
+    // - 0..11 are buttons 1..12
+    // - 12..15 are the D-Pad buttons (Up,Right,Down,Left)
+    // - 16 is the analog button (not all joysticks report this button's state)
+    var buttonPressed = [false, false, false, false,
+			 false, false, false, false,
+			 false, false, false, false,
+			 false, false, false, false,
+			 false];
+    
     // Store the last reported joystick values received from the server
     var analogJoyValues = [128, 128, 128, 128]; 
     
@@ -89,13 +99,14 @@ $(function() {
 	    //console.log("-> buttons ", data.buttonStates);
 	    for (var i = 0; i < 17; i++) {
 		buttonOverlay("#b" + i, data.buttonStates[i]); 
+		buttonPressed[i] = data.buttonStates[i];
 	    }
 	    
 	    // Add code that responds to button presses here!
-      // 
-	    // For example, you could call your own method to do something if the
-	    // Button1 is pressed on the joystick:
-	    if (data.buttonStates[0]) {
+
+	    // For example, you could call your own method to do something if
+	    // Button 1 is pressed on the joystick:
+	    if (buttonPressed[0]) {
 		newMode(); 
 	    }
 	});
@@ -114,8 +125,8 @@ $(function() {
 		follow();
 	    } else if (mode == 'New') {
        
-       // Add code that responds to thumbstick "movement" here!
-       
+		// Add code that responds to thumbstick "movement" here!
+		
 		newMode();
 	    }
 	});
@@ -541,7 +552,7 @@ $(function() {
 	    $("#newButton").html('Stop');			    
 	    $("#new-scan").css("visibility", "visible"); // show animation
        
-       // Add code to be run when the "Start" button is pressed here!
+	    // Add code to be run when the "Start" button is pressed here!
        
 	} else if (mode == "New"){
 	    changeMode("Undefined");
