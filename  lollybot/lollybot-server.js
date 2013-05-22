@@ -60,11 +60,12 @@ var oldData = [0,0,0,0,0,0,0,0]; // store last USB data values received
 // Array to store the button states where:
 // - 0..11 are buttons 1..12
 // - 12..15 are the D-Pad buttons (Up,Right,Down,Left)
-// - 16 is the analog button (not alll joysticks report this button's state)
-var ButtonPressed = [false, false, false, false, false,
-		     false, false, false, false, false,
-		     false, false, false, false, false,
-		     false, false, false];
+// - 16 is the analog button (not all joysticks report this button's state)
+var ButtonPressed = [false, false, false, false,
+		     false, false, false, false,
+		     false, false, false, false,
+		     false, false, false, false,
+		     false];
 
 // Analog joystick values [left-x, left-y, right-x, right-y] (0..255)
 var AnalogJoyValues = [127, 127, 127, 127];
