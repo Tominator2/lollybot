@@ -1,0 +1,1 @@
+Telemetry log files are written in this directory.  The files are in comma separated value (.CSV) format with file names consisting of the date, time, and robot mode (e.g. '2013-05-31--12-15-03-Driving.csv').
