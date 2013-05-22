@@ -184,7 +184,7 @@ if (V_ID == 0 || P_ID == 0 || isNaN(V_ID) || isNaN(P_ID)) {
 	
 	// Check to see if we have appropriate permissions!
 	if (!usbDev.product) {
-		console.error('Cannot access USB device properties!\nIf you are running on Unix-like system check that you have appropriate permissions (or try \'sudo node lollybot-server.js\'');
+		console.error('Cannot access USB device properties!\nIf you are running on a Unix-like system check that you have appropriate permissions (or try \'sudo node lollybot-server.js\'');
 		process.exit(1);	
 	}
 
