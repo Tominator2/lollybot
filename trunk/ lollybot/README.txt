@@ -1,6 +1,6 @@
 Lollybot HTML5 + JavaScript Telemetry & Control 
-Version 0.1.1
-May 14, 2013
+Version 0.1.2
+May 22, 2013
 
 This is the software for Lollybot (formerly known as "Suckerbot") my
 entry in the African Robotics Network (AFRON) $10 Robot Design
@@ -15,7 +15,7 @@ and the programming take place.  You can find more details online at:
 http://www.tomtilley.net/projects/suckerbot/ 
 
 This software is Open Source and the code is released under the GNU
-Public License. You can download the source at:
+Public License. You can download the software which includes the source at:
 
 https://code.google.com/p/lollybot/
 
@@ -192,8 +192,12 @@ TROUBLESHOOTING:
 
 CHANGE LOG:
 -----------
+v0.1.2
+- Minor typo fixes throughout
+- Added a buttonPressed array to the client for storing button states.
+
 v0.1.1
-- Changed the name of the client JavaScript file to lollybot-control
+- Changed the name of the client JavaScript file to lollybot-control.
 - Added a new clearQueue() command.
 
 v0.1.0
