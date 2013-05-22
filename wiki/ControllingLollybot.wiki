@@ -10,7 +10,7 @@ information and sends commands for the robot to the server.  You can
 find more information about how it works on <a href="http://code.google.com/p/lollybot/wiki/HowItWorks">this
 page</a>.
 
-The web-page is implemented using three files:
+The web-page controls the robot and it is implemented using three files:
 
   * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/index.html">index.html</a> which is the HTML code for the page. You can modify this file if you need to add any new buttons, input fields, or interface controls.  The existing page includes a panel to help you get started implementing your own mode that contains a Start/Stop button:
 
@@ -23,7 +23,7 @@ The web-page is implemented using three files:
 
 = Writing Your Own Control Mode =
 
-There are three main ways to add your own code to control Lollybot - code that will run:
+There are three main ways to add your own code to control Lollybot. You can add code that will be run:
 
   # as soon as you press the "Start" button on the "Your Mode!" panel,
   # when one of Lollybot's buttons is pressed, or
@@ -33,7 +33,7 @@ To add your own code you will need to <a href="http://code.google.com/p/lollybot
 
 ==1. Adding Code That Runs When You Press the "Start" Button==
 
-To add code that is run when you press the "Start" button and stops when you press the "Stop" button, find this comment in 'lollybot-control.js':
+To add code that is run when you press the "Start" button (and stops when you press the "Stop" button), find this comment in 'lollybot-control.js':
 {{{
 // Add code to be run when the "Start" button is pressed here!
 }}}
