@@ -160,31 +160,58 @@ http://lollybot.googlecode.com/files/settings.png
 
 =Executing a List of Commands=
 
-To be expanded...
+Sometimes you want to be able to run a number of commands in sequence.  For example, you may want the robot to turn left, move forward, and then turn right, in that order.  This can be done by adding commands to a list or queue using the *addToQueue()* function.  You can then run the commands in the queue by calling the *nextQueueCommand()* function like this:
 
 {{{
 addToQueue(function(){turnLeft(1500)});
-addToQueue(function(){turnRight(1500)});
 addToQueue(function(){moveForward(1500)});
-
-nextQueueCommand();  // process the queue
+addToQueue(function(){turnRight(1500)});
+nextQueueCommand(); 
 }}}
 
-pauseQueue(milliSec);
+There are also functions to clear the queue (*clearQueue()*) and pause the queue (*pauseQueue()*).  The queue functions are summarised below.
 
-clearQueue(); 
 
+===addToQueue(function(){_<some function>_})===
+
+This function will add the function named _<some function>_ to the end of the command queue. See the example above.
+
+
+===nextQueueCommand()====
+
+Calling this function will start processing the commands on the queue in order until the queue is empty. See the example above.
+
+
+===pauseQueue(_milliSec_)===
+
+Adding this command onto the queue will cause it to pause for the specified number of milliSeconds.  For example, you may want Lollybot to move forward when the up button is pressed on the D-pad but you need some time to move your finger away.  You could write some code like this:
+
+{{{
+﻿// Add code that responds to button presses here!
+if (button[12]) {
+  addToQueue(function(){pauseQueue(500)}); // pause for 1/2 second
+  addToQueue(function(){moveForward(1500)});
+  nextQueueCommand();
+} 
+}}}  
+
+
+===clearQueue()=== 
+
+Calling this function empties the queue and any functions on the queue that have *not already started* running will be removed.
 
 
 =Other Useful Commands=
 
-==playBumpSound()==
+
+===playBumpSound()===
 
 This function will play the bump sound that can be selected via the Bump mode panel (see below).  Note that the 'Use bump sound' checkbox must be selected and different browsers support different audio formats.  See the README.txt file in the 'audio/' directory for a list of the formats supported by different browsers.
 
 http://lollybot.googlecode.com/files/bump-mode.png
 
-==sendMessage(text)== 
+
+===sendMessage(_text_)=== 
 
 This function will send a message to be displayed on the server console.  For example:
 
@@ -199,7 +226,7 @@ Lollybot: Hello!
 }}}
 
 
-==console.log(text)==
+===console.log(_text_)===
 
 It is often helpful when trying to find and fix problems in your code to be able to print the value of variables or other information.  You can do this using the JavaScript 'log' function which can display information on a console in your web browser.  For example,  to see the current value of the right thumbsticks's X-axis you could write something like this:
 
