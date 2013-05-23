@@ -99,7 +99,7 @@ To add code that is run when a thumbstick moves or a sensor changes value, find 
 // Add code that responds to thumbstick "movement" here!
 }}}
 
-As with the buttons described above, whenever the value of one of the thumbsticks (or a sensor wired instead of the thumbstick) changes a message is sent from the server containing the values for each of the joystick's axes.  These are copied into an array called *analogJoyValues* with integer values between 0..255 where:
+As with the buttons described above, whenever the value of one of the thumbsticks (or a sensor wired in place of the thumbstick) changes a message is sent from the server containing the values for each of the joystick's axes.  These are copied into an array called *analogJoyValues* with integer values between 0..255 where:
 
   `analogJoyValues[0]` is the left thumbstick's X-axis 
 
@@ -187,7 +187,7 @@ There are also functions to turn the motor on for a set period of time.  See bel
 
 ===sendMotorPower()===
 
-This function will send the current of the two variables _leftMotorPower_ and _rightMotorPower_ to the robot's motors. See the examples above.
+This function will send the current value of the two variables _leftMotorPower_ and _rightMotorPower_ to the robot's motors. See the examples above.
 
 
 ===stopMotors()=== 
