@@ -155,6 +155,7 @@ rightMotorPower = 255; // 0..255
 
 sendMotorPower();
 
+http://lollybot.googlecode.com/files/settings.png
 
 
 =Executing a List of Commands=
@@ -177,10 +178,33 @@ clearQueue();
 
 =Other Useful Commands=
 
-To be expanded...
+==playBumpSound()==
 
-playBumpSound()
+This function will play the bump sound that can be selected via the Bump mode panel (see below).  Note that the 'Use bump sound' checkbox must be selected and different browsers support different audio formats.  See the README.txt file in the 'audio/' directory for a list of the formats supported by different browsers.
 
-sendMessage(text); 
+http://lollybot.googlecode.com/files/bump-mode.png
 
-Also console logging.
+==sendMessage(text)== 
+
+This function will send a message to be displayed on the server console.  For example:
+
+{{{
+sendMessage("Hello!");
+}}}
+
+will be displayed on the server console as:
+
+{{{
+Lollybot: Hello!
+}}}
+
+
+==console.log(text)==
+
+It is often helpful when trying to find and fix problems in your code to be able to print the value of variables or other information.  You can do this using the JavaScript 'log' function which can display information on a console in your web browser.  For example,  to see the current value of the right thumbsticks's X-axis you could write something like this:
+
+{{{
+console.log("Right X-axis = " + analogJoyValues[2]);
+}}}
+
+To see the values displayed you must open your browser's web developer console.  You can open the web developer console via your browsers menu (usually under the 'Tools' option) or via key shortcuts.  You can find a list of shortcuts for different browsers [http://webmasters.stackexchange.com/questions/8525/how-to-open-the-javascript-console-in-different-browsers here].
