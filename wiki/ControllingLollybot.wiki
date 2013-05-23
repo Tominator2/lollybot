@@ -137,25 +137,80 @@ if (analogJoyValues[0] < 127) {
 
 =Controlling the Motors=
 
-To be expanded...
+Lollybot has two motors which drive the wheels. These motors have an adjustable power level from 0 (off) up to 255 (maximum power), however, the motors are not very strong and only power levels close to the maximum will cause the wheels to turn.
 
-moveForward(1500)
+To turn the motors on you must first set the desired power level of two variables *leftMotorPower* and *rightMotorPower* then send these levels to the robot using the *sendMotorPower()* function.  For example, you can start the robot moving forward like this:
 
-turnLeft(1500)
-
-turnRight(1500)
-
-runMotors(0, 255, milliSec)
-
-stopMotors() 
-
-leftMotorPower  = 255; // 0..255
-
-rightMotorPower = 255; // 0..255
-
+{{{
+leftMotorPower  = 255; // set the left motor power level
+rightMotorPower = 255; // set the right motor power level
 sendMotorPower();
+}}}
+
+To stop the robot you can simply set both power levels to 0 like this:
+
+{{{
+leftMotorPower  = 0;
+rightMotorPower = 0; 
+sendMotorPower();
+}}}
+
+or there is a single function that does the same thing called *stopMotors*:
+
+{{{
+stopMotors();
+}}}
+
+You can make Lollybot turn by setting the motors to different power levels.  For a sharp turn you can set one motor power level to 0 and the other to 255.  If the left motor power level is greater then the right level then Lollybot will turn left:
+
+{{{
+leftMotorPower  = 255;
+rightMotorPower = 0; 
+sendMotorPower();
+}}}
+
+If the right motor power is greater than the left then Lollybot will turn right:
+
+{{{
+leftMotorPower  = 0;
+rightMotorPower = 255; 
+sendMotorPower();
+}}}
+
+If you have come up with an alternative design for your robot then there is an option to swap the motors on the settings panel:
 
 http://lollybot.googlecode.com/files/settings.png
+
+This will send the left motor power level to the right motor and the right motor power level to the left motor.
+
+There are also functions to turn the motor on for a set period of time.  See below for a summary of all the functions available to control the motors. 
+
+===sendMotorPower()===
+
+This function will send the current of the two variables _leftMotorPower_ and _rightMotorPower_ to the robot's motors. See the examples above.
+
+
+===stopMotors()=== 
+
+This function stops both motors by setting the value of the variables _leftMotorPower_ and _rightMotorPower_ to 0 and then sending them to the robot. 
+
+
+===moveForward(_milliSec_)===
+
+This function makes the robot drive forward for _milliSec_ milliSeconds at maximum power. 
+
+===turnLeft(_milliSec_)===
+
+This function makes the robot turn left by turning on the left motor for _milliSec_ milliSeconds at maximum power. 
+
+
+===turnRight(_milliSec_)===
+
+This function makes the robot turn right by turning on the right motor for _milliSec_ milliSeconds at maximum power. 
+
+
+===runMotors(_leftPower_, _rightPower_, _milliSec_)===
+This function will turn on both motors at the given power levels for _milliSec_ milliSeconds. 
 
 
 =Executing a List of Commands=
