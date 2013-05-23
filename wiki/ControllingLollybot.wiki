@@ -1,7 +1,7 @@
 #summary This page will give you a brief overview of how to get started writing your own robot control mode.
 #labels Featured,Phase-Implementation
 
-= Introduction =
+=Introduction=
 
 Lollybot's control software consists of two parts - a server that
 simply handles communication with the the robot and a client web-page
@@ -21,7 +21,7 @@ The web-page controls the robot and it is implemented using three files:
   * <a href="http://code.google.com/p/lollybot/source/browse/trunk/%20lollybot/css/lollybot.css">lollybot.css</a> which contains <a href="https://en.wikipedia.org/wiki/Cascading_Style_Sheets">CSS</a> code used to describe the style of some of the web-page elements.
 
 
-= Writing Your Own Control Mode =
+=Writing Your Own Control Mode=
 
 There are three main ways to add your own code to control Lollybot. You can add code that will be run:
 
@@ -33,12 +33,28 @@ To add your own code you will need to <a href="http://code.google.com/p/lollybot
 
 ==1. Adding Code That Runs When You Press the "Start" Button==
 
-To add code that is run when you press the "Start" button (and stops when you press the "Stop" button), find this comment in 'lollybot-control.js':
+To add code that is run when you press the "Start" button, find this comment in 'lollybot-control.js':
 {{{
 // Add code to be run when the "Start" button is pressed here!
 }}}
 
-To be expanded...
+You can add your own code to be executed at this point or you could call another function.  For example, there is a function called *sendMessage()* that will send a message to be displayed on the console from the robot.  You could add some code to send a message to the server when your mode starts like this:
+
+{{{
+// Add code to be run when the "Start" button is pressed here!
+sendMessage("My mode started!");
+}}}
+
+Whenever a mode starts (e.g "Driving" mode) then a variable called *mode* is updated with the name of the current mode.  The mode name for your mode is "_New_". When the "Stop" button is pressed then the mode name is changed to "_Undefined_".  You can check the value of the mode variable to see if your mode should stop running.  For example:
+
+{{{
+while (mode == "New") {
+
+  // Do something here
+
+}
+}}}
+
 
 ==2. Adding Code That Runs When a Button is Pressed==
 
@@ -47,7 +63,34 @@ To add code that is run in response to a button press, find this comment in 'lol
 ﻿// Add code that responds to button presses here!
 }}}
 
-To be expanded...
+Whenever a button is pressed or released on the robot (or the buttons could be wired to other sensors so it appears that they are being pressed/released) then the server sends a message containing the current state of all the buttons.  This information is copied into an array called *buttonPressed* that contains the value '_true_' for any button that is currently pressed and '_false_' if the button is not pressed.
+
+On most joysticks there are 17 buttons (including the 'Analog' mode button) and you can check their state in buttonPressed where:
+  `buttonPressed[0]` is button 1
+ 
+  `...`
+
+  `buttonPressed[11]`  is button 12
+
+  `buttonPressed[12]` is Up on the D-pad
+
+  `buttonPressed[13]` is Right on the D-pad
+
+  `buttonPressed[14]` is Down on the D-pad
+
+  `buttonPressed[15]` is Left on the D-pad
+
+  `buttonPressed[16]` is the Analog button (note that this is not reported by all joysticks)
+
+For example, to run some code when button 3 is pressed you could modify the code like this:
+
+{{{
+﻿// Add code that responds to button presses here!
+if (button[2]) {
+  sendMessage("Button 3 pressed!");
+}
+}}}
+ 
 
 ==3. Adding Code That Runs When a Thumbstick "Moves"==
 
@@ -56,7 +99,40 @@ To add code that is run when a thumbstick moves or a sensor changes value, find 
 // Add code that responds to thumbstick "movement" here!
 }}}
 
-To be expanded...
+As with the buttons described above, whenever the value of one of the thumbsticks (or a sensor wired instead of the thumbstick) changes a message is sent from the server containing the values for each of the joystick's axes.  These are copied into an array called *analogJoyValues* with integer values between 0..255 where:
+
+  `analogJoyValues[0]` is the left thumbstick's X-axis 
+
+  `analogJoyValues[1]` is the left thumbstick's Y-axis 
+
+  `analogJoyValues[2]` is the right thumbstick's X-axis 
+
+  `analogJoyValues[3]` is the right thumbstick's Y-axis 
+
+The center position for each of the joysticks has the value 127 (or 128 in analog mode), so for an X-axis:
+
+  values < 127 are to the left
+
+  values > 128 are to the right
+
+and for a Y-axis:
+
+  values < 127 are in the up direction
+
+  values > 128 are in the down direction.
+
+*Note* that if the joystick is not in analog mode then these values will only be 0 (hard left or up), 127 (centered), or 255 (right or down). To get the full range of analog values from 0 to 255 the joystick must be in analog mode (usually indicated by an LED near the 'analog' button.
+
+For example, to send a message about the direction of the left thumbstick's X-axis to the server console you could modify the code like this:
+
+{{{
+// Add code that responds to thumbstick "movement" here!
+if (analogJoyValues[0] < 127) {
+  sendMessage("left");
+} else if (analogJoyValues[0] > 128) {
+  sendMessage("right");
+}
+}}} 
 
 
 =Controlling the Motors=
