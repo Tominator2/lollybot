@@ -253,7 +253,7 @@ if (button[12]) {
 
 ===clearQueue()=== 
 
-Calling this function empties the queue and any functions on the queue that have *not already started* running will be removed.
+Calling this function empties the queue and any functions on the queue that have *not already started* running will be removed. This function gets called automatically to clear the queue when the "Stop" button is pressed in the "Your Mode" panel.
 
 
 =Other Useful Commands=
