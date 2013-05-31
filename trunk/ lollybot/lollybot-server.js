@@ -51,7 +51,7 @@ var HID = require('./windows/HID');  // plug-in for USB communication on WinXP/7
 var REPL = require('repl');          // Needed by node-hid
 var repl = REPL.start({ignoreUndefined: true}); // REPL.start('node-hid> ');
 
-var versionNo = "0.1.0";
+var versionNo = "0.2.0";
 
 var portNo = "8075"; // Default port for conections - "BOTS" in 1337!
 
@@ -248,6 +248,10 @@ io.sockets.on('connection', function (socket) {
     
     socketConnection = socket;
     console.log("-> Connection from", socket.handshake.address.address);
+    hid.write(OffInstr); // turn off motors in case of reconnect and motors still running
+    motorL = 0;
+    motorR = 0;
+    
     
     // Receive motor instructions
     socket.on('motors', function(data) {
@@ -297,6 +301,9 @@ io.sockets.on('connection', function (socket) {
     // Client disconnected
     socket.on('disconnect', function () {
 	console.log("-> client disconnected."); 
+	hid.write(OffInstr); // turn off the motors
+	motorL = 0;
+	motorR = 0;
     });
     
     // Receive a message from the client to display on the server console
