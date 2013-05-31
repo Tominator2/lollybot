@@ -66,6 +66,15 @@ $(function() {
     var leftLineSensorAxis  = $("#leftSensorAxis option").filter(":selected").val();
     var rightLineSensorAxis = $("#rightSensorAxis option").filter(":selected").val();
 
+    // Thresholds for the left and right line sensors
+    var leftLineSensorThreshold  = 128;
+    var rightLineSensorThreshold = 128;
+
+    // Used in line following mode for when the line is lost - where did we see it last?
+    var lineLastSeen = "Unknown";  // Unknown|Left|Right
+
+    calculateThresholds();
+
     var socket = io.connect('http://localhost:8075');  // 'BOT' 
 
     var bumped = false; // bump flag
@@ -107,7 +116,7 @@ $(function() {
 	    // For example, you could call your own method to do something if
 	    // Button 1 is pressed on the joystick:
 	    if (buttonPressed[0]) {
-		newMode(); 
+		sendMessage("Button 1 pressed!"); 
 	    }
 	});
 	
@@ -121,13 +130,10 @@ $(function() {
 	    // Call the appropriate function depending upon the current mode
 	    if (mode == 'Bump') {
 		bump();
-	    } else if (mode == 'Following') {
-		follow();
 	    } else if (mode == 'New') {
        
 		// Add code that responds to thumbstick "movement" here!
-		
-		newMode();
+
 	    }
 	});
     }
@@ -144,7 +150,8 @@ $(function() {
 	var threshold = $("#bumpThreshold").val();
 	var axis = $("#bumpAxis option").filter(":selected").val();
 	
-	if (analogJoyValues[axis] < (128 - threshold) || analogJoyValues[axis] > (128 + (threshold * 1))) {  // '* 1' is to force addition instead of concatenation
+	if (analogJoyValues[axis] < (128 - threshold) || 
+	    analogJoyValues[axis] > (128 + parseInt(threshold))) {
 	    if (!bumped) {
 		bumped = true;   // set the bump flag
 		addToQueue(function(){playBumpSound()});
@@ -169,28 +176,81 @@ $(function() {
 
 
     // Implements the line following functionality
+    //
+    // This method is called once when the start/stop button is
+    // pressed.  It relies on using motor control functions that are
+    // pushed onto the command queue.  When the queue is empty then
+    // the nextQueueCommand() function call "follow()' again.
     function follow() {
 
-	// if these were updated globally (on change) then we wouldn't require
-	// a call each time.
-
+	// Exit if we are not in line following mode
+	if (mode != "Following") {
+	    clearQueue();
+	    return;
+	}
+	    
 	var leftSensor  = analogJoyValues[leftLineSensorAxis];
 	var rightSensor = analogJoyValues[rightLineSensorAxis];
 
 	if ($("#blackLine").is(":checked")) { // following a black line
 	    //console.log("Following black line: " + leftSensor + ", " + rightSensor); 
-	    // steer here!
+	    if ((leftSensor < leftLineSensorThreshold) &&
+	       (rightSensor < rightLineSensorThreshold)) { 
+		lineLastSeen="Unknown";
+		addToQueue(function(){moveForward(150)}); // both sensors over black (below threshold) -> go straight!
+	    } else if ((leftSensor < leftLineSensorThreshold) &&
+		       (rightSensor >= rightLineSensorThreshold)) { 
+		lineLastSeen = "Right";
+		addToQueue(function(){turnRight(150)}); // left over black, right over white -> steer right
+		addToQueue(function(){moveForward(100)});
+	    } else if ((leftSensor >= leftLineSensorThreshold) &&
+		       (rightSensor < rightLineSensorThreshold)) { 
+		lineLastSeen = "Left";
+		addToQueue(function(){turnLeft(150)}); // left over white, right over black -> steer left
+		addToQueue(function(){moveForward(100)});
+	    } else { 
+		// both over white (above threshold) -> lost the line!
+		if (lineLastSeen == "Left") {
+		    addToQueue(function(){turnLeft(100)});
+		    addToQueue(function(){moveForward(100)});
+		} else if (lineLastSeen == "Right") {
+		    addToQueue(function(){turnRight(100)});
+		    addToQueue(function(){moveForward(100)});
+		} else {
+		    sendMessage("Help! I'm lost!"); 
+		    // we are sending 0 power to both motors.  The timeout
+		    // will then call 'follow()' again while we are in
+		    // following mode.
+		    //addToQueue(function(){runMotors(0, 0, 250)});
+		    addToQueue(function(){pauseQueue(250)});
+		}
+	    }
 	} else { // following a white line
 	    //console.log("Following white line: " + leftSensor + ", " + rightSensor); 
 	    // steer here!
+
+	    // The 'White' radio button in 'index.html' is currently
+	    // disabled.  To enable it just remove the 'disabled'
+	    // attribute from the "WhiteLine" radio button.
+
 	}
+
+	// Intertia keeps the robot moving which adds to overshoot so
+	// we will pause the queue for a short while to help stop the
+	// robot
+	addToQueue(function(){pauseQueue(75)});
+
+	// Run the commands we added to the queue.  When the Queue is empty the
+	// follow() function will be called again.
+	nextQueueCommand();
+
     }
 
 
     // Implement your own mode here!
     function newMode() {
 	// have a look at the bump() function above for ideas.
-	sendMessage("Button 1 pressed!"); // display  message on the server console
+
     }
 
 
@@ -224,16 +284,19 @@ $(function() {
 	    return false;
 	}
     }
+
     
     // write log file?
     $("#loggingCheckbox").click(function() {
 	socket.emit('logging', $(this).is(":checked"));
     });
+
 	
     // swap motors
     $("#loggingCheckbox").click(function() {
 	swapMotors = $(this).is(":checked");
     });
+
     
     // connect to different server
     // - should do some validation to check the port no. & range
@@ -277,7 +340,7 @@ $(function() {
     });
 
     
-    // Key handling for drving 
+    // Key handling for driving 
     // (should have a flag for "in driving" mode) 
     $(document).keydown(function(evt) {
 	if (keyAlreadyDown[evt.which] == null) {
@@ -357,6 +420,7 @@ $(function() {
 	buttonOverlay("#b17", rightMotorPower > 0);
     }
     
+
     // toggle button overlays
     function buttonOverlay(buttonNo, isPressed) {
 	if (isPressed) {
@@ -537,6 +601,7 @@ $(function() {
 	    changeMode("Following");
 	    $("#followButton").html('Stop');			    
 	    $("#following-scan").css("visibility", "visible"); // show animation
+	    follow();
 	} else if (mode == "Following"){
 	    changeMode("Undefined");
 	    $("#followButton").html('Start');			    
@@ -582,10 +647,13 @@ $(function() {
     $("#playBumpSound").click(function() {
 	playBumpSound();
     });
+
     
+    // Change the state of the bump sound flag
     $("#bumpSoundCheckbox").click(function() {
 	enableBumpSound($(this).is(":checked"));
     });
+
     
     // Enable/disable the bump sound widgets
     // note that this could be more elegant if we simply get the div's 
@@ -657,8 +725,12 @@ $(function() {
 
     // Remove the command on the front of the queue and run it (if any)
     function nextQueueCommand() {
-	if (commandQueue.length > 0) {
+	if (commandQueue.length > 0) {   // commands on queue
 	    commandQueue.shift().call();
+	} else {                         // queue is empty!
+	    if (mode == "Following") {
+		follow();
+	    }
 	}
     }
 
@@ -721,9 +793,11 @@ $(function() {
 	leftMotorPower  = 0;
 	rightMotorPower = 0;
 	sendMotorPower();
+
 	if (mode != "Driving") {
 	    nextQueueCommand();
 	}
+
     }
 
 
@@ -739,24 +813,31 @@ $(function() {
     $("#leftWhiteLevelButton").click(function() {
 	var axis = $("#leftSensorAxis option").filter(":selected").val();
 	$("#leftWhiteLevel").val(analogJoyValues[axis]);
+	calculateThresholds();
     });   
+
 
     // Update the left sensor black level via the "Detect" button
     $("#leftBlackLevelButton").click(function() {
 	var axis = $("#leftSensorAxis option").filter(":selected").val();
 	$("#leftBlackLevel").val(analogJoyValues[axis]);
+	calculateThresholds();
     });   
+
 
     // Update the right sensor white level via the "Detect" button
     $("#rightWhiteLevelButton").click(function() {
 	var axis = $("#rightSensorAxis option").filter(":selected").val();
 	$("#rightWhiteLevel").val(analogJoyValues[axis]);
+	calculateThresholds();
     });   
+
 
     // Update the right sensor black level via the "Detect" button
     $("#rightBlackLevelButton").click(function() {
 	var axis = $("#rightSensorAxis option").filter(":selected").val();
 	$("#rightBlackLevel").val(analogJoyValues[axis]);
+	calculateThresholds();
     });   
 
 
@@ -765,10 +846,24 @@ $(function() {
 	leftLineSensorAxis  = $("#leftSensorAxis option").filter(":selected").val();
     });
 
+
     // update which joystick axis is used as the right line sensor
     $("#rightSensorAxis").change(function() {
 	rightLineSensorAxis  = $("#rightSensorAxis option").filter(":selected").val();
     });
+
+
+    // Calculate the threshold values for the left and right line sensors
+    function calculateThresholds () {
+
+	leftLineSensorThreshold = (parseInt($("#leftWhiteLevel").val()) + parseInt($("#leftBlackLevel").val()))/2;
+	rightLineSensorThreshold = (parseInt($("#rightWhiteLevel").val()) + parseInt($("#rightBlackLevel").val()))/2;
+
+
+	//leftLineSensorThreshold = parseInt($("#leftBlackLevel").val()) + 10;
+	//rightLineSensorThreshold = parseInt($("#leftBlackLevel").val()) + 10;
+
+    }
 
 });
 
