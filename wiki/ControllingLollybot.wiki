@@ -45,10 +45,21 @@ You can add your own code to be executed at this point or you could call another
 sendMessage("My mode started!");
 }}}
 
+or, you could call your own control function:
+
+{{{
+// Add code to be run when the "Start" button is pressed here!
+myControlFunction();
+}}}
+
 Whenever a mode starts (e.g "Driving" mode) then a variable called *mode* is updated with the name of the current mode.  The mode name for your mode is "_New_". When the "Stop" button is pressed then the mode name is changed to "_Undefined_".  You can check the value of the mode variable to see if your mode should stop running.  For example:
 
 {{{
-while (mode == "New") {
+function myControlFunction () {
+
+  if (mode != "New") {
+    return();  // exit the function if we are not in "New" mode 
+  }
 
   // Do something here
 
