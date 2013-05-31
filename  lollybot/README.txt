@@ -1,6 +1,6 @@
 Lollybot HTML5 + JavaScript Telemetry & Control 
-Version 0.1.2
-May 22, 2013
+Version 0.2.0
+May 31, 2013
 
 This is the software for Lollybot (formerly known as "Suckerbot") my
 entry in the African Robotics Network (AFRON) $10 Robot Design
@@ -192,6 +192,12 @@ TROUBLESHOOTING:
 
 CHANGE LOG:
 -----------
+v0.2.0
+- Implemented a basic line following mode.  Note that the current
+  position of the line sensors underneath the robot makes it easy for
+  the robot to lose the line.  I will update the placs for the robot
+  soon to bring the line sensors further forward.
+
 v0.1.2
 - Minor typo fixes throughout
 - Added a buttonPressed array to the client for storing button states.
