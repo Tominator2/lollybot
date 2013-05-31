@@ -37,8 +37,8 @@ by default (although there is a gloabl option) so you should change
 into the 'lollybot/' directory (download the Lollybot source and unzip it if you haven't already):
 
 {{{
-wget http://lollybot.googlecode.com/files/lollybot-v0.1.2.zip
-gunzip lollybot-v0.1.2.zip
+wget http://lollybot.googlecode.com/files/lollybot-v0.2.0.zip
+gunzip lollybot-v0.2.0.zip
 cd lollybot/
 npm install commander
 npm install socket.io
