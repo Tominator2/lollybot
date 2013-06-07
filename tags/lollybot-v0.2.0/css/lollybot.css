@@ -1,0 +1,46 @@
+#joysticks {
+    position: relative;
+}
+.overlay{
+    position: absolute;
+    top:  0px;
+    left: 0px;
+    z-index: 1;
+    visibility: hidden;
+}
+.button-off{
+    position: absolute;
+    height: 69px;
+    z-index: 1;
+}
+.button-on{
+    position: absolute;
+    height: 69px;
+    z-index: 0;
+}
+
+fieldset {
+    margin: 2px 8px 2px 0px;
+    border: 1px solid #161458;
+    padding: 8px;    
+    border-radius: 4px;
+    background-color:#ECE9D8;
+} 
+legend {
+    padding: 2px;    
+}
+body
+{
+    font-size:75%;
+    font-family:Arial,Helevetica,'sans-serif';
+}
+th
+{
+    background-color:#161458;
+    color:#FFFFFF;
+    text-align: left;
+    vertical-align: middle;
+    font-size: 150%;
+    font-weight: bold;
+    height: 40px;
+}
