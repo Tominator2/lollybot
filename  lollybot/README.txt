@@ -123,16 +123,7 @@ Getting Started - Mac OS/Linux:
      https://github.com/hanshuebner/node-hid
      http://code.google.com/p/lollybot/wiki/LinuxBuild
 
-5) Comment out this line (for the pre-built Windows version of
-   node-hid) in the 'lollybot-server.js' file:
-
-     // var HID = require('./windows/HID'); 
-
-   and uncomment this line:
-
-     var HID = require('node-hid');
-
-6) Connect the robot's USB cable to the computer and start the server
+5) Connect the robot's USB cable to the computer and start the server
    by typing:
 
      sudo node lollybot-server
@@ -141,12 +132,12 @@ Getting Started - Mac OS/Linux:
 
    (for a list of available options type: 'sudo node lollybot-server --help')
 
-7) Open the 'index.html' file in a modern web browser (see
+6) Open the 'index.html' file in a modern web browser (see
    'requirements' above) or point your browser at: 
 
      http://tomtilley.net/projects/suckerbot/html5/
 
-8) The Lollybot's speech bubble at the top of the screen should change
+7) The Lollybot's speech bubble at the top of the screen should change
    from a red cross to a green tick when you are connected to the
    server.  The robot is initially in driving mode but you can change
    modes by clicking the panels on the right side of the screen.  If
