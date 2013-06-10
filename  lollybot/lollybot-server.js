@@ -44,10 +44,20 @@
 
 var program = require('commander');  // plug-in for command line options
 
-// Uncomment the appropriate line below depending upon your platform:
-var HID = require('./windows/HID');  // plug-in for USB communication on WinXP/7
-// var HID = require('node-hid');  // plug-in for USB communication on Linux/Mac
- 
+// Check which platform we are running on and use the pre-compiled
+// version of node-hid plug-in for USB on Windows
+var HID = null;
+var os = require('os');
+if (os.platform() == 'win32') { // both 32 & 63 bit windows return 'win32'
+    HID = require('./windows/HID');  // pre-compiled plug-in for WinXP/7
+    }
+else {
+    HID = require('node-hid');       // plug-in for Linux/Mac
+} 
+
+// Used for finding local IP address(es)
+var ifaces = os.networkInterfaces();
+
 var REPL = require('repl');          // Needed by node-hid
 var repl = REPL.start({ignoreUndefined: true}); // REPL.start('node-hid> ');
 
