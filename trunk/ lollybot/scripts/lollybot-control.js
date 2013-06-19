@@ -75,7 +75,7 @@ $(function() {
 
     calculateThresholds();
 
-    var socket = io.connect('http://localhost:8075');  // 'BOT' 
+    var socket = io.connect('http://localhost:8075');  // 'BOTS' 
 
     var bumped = false; // bump flag
 
@@ -286,19 +286,19 @@ $(function() {
     }
 
     
-    // write log file?
+    // Write log file?
     $("#loggingCheckbox").click(function() {
 	socket.emit('logging', $(this).is(":checked"));
     });
 
 	
-    // swap motors
+    // Swap motors
     $("#loggingCheckbox").click(function() {
 	swapMotors = $(this).is(":checked");
     });
 
     
-    // connect to different server
+    // Connect to different server
     // - should do some validation to check the port no. & range
     $("#connectButton").click(function() {
 	var port = $("#serverPort").val(); // 1..65535			
@@ -406,14 +406,14 @@ $(function() {
     // Transmit power to motors and update the images
     function sendMotorPower() {
 	
-	// check for motor swap
+	// Check for motor swap
 	if ($("#swapCheckbox").is(":checked")) {
 	    var temp = leftMotorPower;
 	    leftMotorPower = rightMotorPower;
 	    rightMotorPower = temp;
 	}
 	
-	// send data to the server
+	// Send data to the server
 	socket.emit('motors',{left: leftMotorPower, right: rightMotorPower});
 	// turn on appropriate UI images
 	buttonOverlay("#b18", leftMotorPower > 0);
@@ -421,7 +421,7 @@ $(function() {
     }
     
 
-    // toggle button overlays
+    // Toggle button overlays
     function buttonOverlay(buttonNo, isPressed) {
 	if (isPressed) {
 	    $(buttonNo).css("visibility", "visible");
@@ -445,7 +445,7 @@ $(function() {
 	var rightYpoints = [];
 	var points_max = 45;  // on screen for approx. 3 seconds at 66mS
 	
-	// pre-populate the graphs with data so scrolling starts from the right
+	// Pre-populate the graphs with data so scrolling starts from the right
 	for (var i = 0; i < points_max; i++){
 	    leftXpoints[i]  = analogJoyValues[0];	  
 	    leftYpoints[i]  = analogJoyValues[1];	  
@@ -477,13 +477,13 @@ $(function() {
 				      fillColor: false, 
 				      lineColor: '#0000FF'};
 	    
-	    // add the latest data to the end of the array
+	    // Add the latest data to the end of the arrays
 	    leftXpoints.push(analogJoyValues[0]);
 	    leftYpoints.push(analogJoyValues[1]);
 	    rightXpoints.push(analogJoyValues[2]);
 	    rightYpoints.push(analogJoyValues[3]);
 	    
-	    // scroll the graph by removing the first data point
+	    // Scroll the graph by removing the first data points
 	    if (leftXpoints.length > points_max) {
 		leftXpoints.splice(0,1);
 		leftYpoints.splice(0,1);
@@ -508,13 +508,13 @@ $(function() {
     drawJoystickData();
 
 	
-    // send a message that will be displayed on the server's console
+    // Send a message that will be displayed on the server's console
     function sendMessage(message){
 	socket.emit('message', message);
     };
     
 
-    // open and close the control panels
+    // Open and close the control panels
     function changePanels(panel) {
 	// should also check not in bump or following modes!
 	if ($(panel).is(":hidden") && (mode == "Driving" || mode == "Undefined")) {
@@ -629,7 +629,7 @@ $(function() {
 
     
     function queueTest() {
-	// push some commands onto the queue and then execute them
+	// Push some commands onto the queue and then execute them
 	addToQueue(function(){playBumpSound()});
 	addToQueue(function(){turnLeft(1500)});
 	addToQueue(function(){playBumpSound()});
@@ -672,17 +672,8 @@ $(function() {
 	}
     };
     
-    // initially set 'use bump sound' to false
+    // Initially set 'use bump sound' to false
     enableBumpSound(false);
-    
-    // This will reset the 'bump sound' checkbox if the page is reloaded
-    // to make sure it is consistent with the enabled/disabled state of 
-    // the other widgets. 
-    //
-    // Not sure if this works consistently?			    
-    $('body').bind('beforeunload',function(){
-	$("#bumpSoundCheckbox").prop('checked', false); 
-    });
     
 
     // Attach a change handler to the file-input field
@@ -753,19 +744,19 @@ $(function() {
 
 
 
-    // drive forward for 'milliSec' milliseconds
+    // Drive forward for 'milliSec' milliseconds
     function moveForward(milliSec) {
 	return runMotors(255, 255, milliSec);
     }
 
 
-    // turn left for 'milliSec' milliseconds
+    // Turn left for 'milliSec' milliseconds
     function turnLeft(milliSec) {
 	return runMotors(255, 0, milliSec);
     }
 
 
-    // drive forward for 'milliSec' milliseconds
+    // Drive forward for 'milliSec' milliseconds
     function turnRight(milliSec) {
 	return runMotors(0, 255, milliSec);
     }
@@ -801,7 +792,7 @@ $(function() {
     }
 
 
-    // pause execution of commands in the queue for 'milliSec' milliseconds
+    // Pause execution of commands in the queue for 'milliSec' milliseconds
     function pauseQueue(milliSec){
 	setTimeout(function(){nextQueueCommand()}, milliSec);
     }
@@ -841,13 +832,13 @@ $(function() {
     });   
 
 
-    // update which joystick axis is used as the left line sensor
+    // Update which joystick axis is used as the left line sensor
     $("#leftSensorAxis").change(function() {
 	leftLineSensorAxis  = $("#leftSensorAxis option").filter(":selected").val();
     });
 
 
-    // update which joystick axis is used as the right line sensor
+    // Update which joystick axis is used as the right line sensor
     $("#rightSensorAxis").change(function() {
 	rightLineSensorAxis  = $("#rightSensorAxis option").filter(":selected").val();
     });
