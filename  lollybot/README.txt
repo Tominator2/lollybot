@@ -186,7 +186,7 @@ CHANGE LOG:
 v0.2.0
 - Implemented a basic line following mode.  Note that the current
   position of the line sensors underneath the robot makes it easy for
-  the robot to lose the line.  I will update the placs for the robot
+  the robot to lose the line.  I will update the plans for the robot
   soon to bring the line sensors further forward.
 
 v0.1.2
