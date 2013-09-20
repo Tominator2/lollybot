@@ -97,7 +97,7 @@ For example, to run some code when button 3 is pressed you could modify the code
 
 {{{
 ﻿// Add code that responds to button presses here!
-if (button[2]) {
+if (buttonPressed[2]) {
   sendMessage("Button 3 pressed!");
 }
 }}}
@@ -254,7 +254,7 @@ Adding this command onto the queue will cause it to pause for the specified numb
 
 {{{
 ﻿// Add code that responds to button presses here!
-if (button[12]) {
+if (buttonPressed[12]) {
   addToQueue(function(){pauseQueue(500)}); // pause for 1/2 second
   addToQueue(function(){moveForward(1500)});
   nextQueueCommand();
