@@ -1,6 +1,6 @@
 Lollybot HTML5 + JavaScript Telemetry & Control 
-Version 0.2.0
-May 31, 2013
+Version 0.2.1
+June 25, 2014
 
 This is the software for Lollybot (formerly known as "Suckerbot") my
 entry in the African Robotics Network (AFRON) $10 Robot Design
@@ -40,7 +40,8 @@ REQUIREMENTS:
 - Node.js v0.9.1 (http://nodejs.org/dist/v0.9.1/)
     - with the following plug-ins installed (see below for more information)
       	 - commander (https://npmjs.org/package/commander)
-      	 - Socket.IO (http://socket.io/)
+      	 - Socket.IO v0.9.13 (http://socket.io/  Note that Socket.IO has been 
+                              updated and newer versions of won't work!)
          - node-hid  (https://github.com/hanshuebner/node-hid)	  
 
 - a modern, HTML5 compliant web-browser: 
@@ -64,8 +65,9 @@ Getting Started - Windows:
      
 3) Install the required plug-ins for Node.js by typing:
 
+     npm config set strict-ssl false
      npm install commander
-     npm install socket.io
+     npm install socket.io@0.9.13
 
 4) The software comes with a pre-built version of the node-hid plugin
    for windows ('Hid.node') that has been tested on WinXP and Windows 7
@@ -105,8 +107,9 @@ Getting Started - Mac OS/Linux:
 
 3) Install the required plug-ins by typing:
 
+     npm config set strict-ssl false
      npm install commander
-     npm install socket.io
+     npm install socket.io@0.9.13
 
 4) Before installing the node-hid plug-in make sure you also have:
 
@@ -175,14 +178,31 @@ TROUBLESHOOTING:
   different machine you can enter the server name or IP address and
   port number in the settings panel then press 'Connect'.  Make sure
   that your firewall will allow the connection through.
+  
+- If the red cross doesn't change to a green tick as per step 7 above then 
+  check the JavaScript console in your browser.  If it displays:
+  
+  Failed to load resource: the server responded with a status of 400 (Bad Request) 
+  
+  then you may be using a more recent version of Socket.io which does not
+  work with his version of the code.  You can uninstall and reinstall a working 
+  version of Scoket.io by following step 2 above and then typing:
+  
+    npm uninstall socket.io
+    npm install socket.io@0.9.13
 
-- Check the Lollybot Wiki page at Google Code: 
+- Check the Lollybot Wiki page for issues at Google Code: 
 
     http://code.google.com/p/lollybot/w/list
 
 
 CHANGE LOG:
 -----------
+v0.2.1
+- Updated the installation instructions which break with newer versions
+  of Socket.IO and to workaround the expired SSL certificate problem
+  when installing plug-ins. 
+
 v0.2.0
 - Implemented a basic line following mode.  Note that the current
   position of the line sensors underneath the robot makes it easy for
