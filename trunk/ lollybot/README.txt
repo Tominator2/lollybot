@@ -40,8 +40,9 @@ REQUIREMENTS:
 - Node.js v0.9.1 (http://nodejs.org/dist/v0.9.1/)
     - with the following plug-ins installed (see below for more information)
       	 - commander (https://npmjs.org/package/commander)
-      	 - Socket.IO v0.9.13 (http://socket.io/  Note that Socket.IO has been 
-                              updated and newer versions of won't work!)
+      	 - Socket.IO v0.9.13 (http://socket.io/) 
+                     Note that Socket.IO has been updated and newer versions 
+                     won't work!
          - node-hid  (https://github.com/hanshuebner/node-hid)	  
 
 - a modern, HTML5 compliant web-browser: 
@@ -52,7 +53,7 @@ REQUIREMENTS:
     - Safari 5+ 
 
 
-Getting Started - Windows:
+GETTING STARTED - Windows:
 -------------------------
 1) Install Node.js version 0.9.1 for Windows:
 
@@ -93,7 +94,7 @@ Getting Started - Windows:
    see 'troubleshooting" below.
 
 
-Getting Started - Mac OS/Linux:
+GETTING STARTED - Mac OS/Linux:
 -------------------------------
 
 1) Install Node.js version 0.9.1 (available at http://nodejs.org/dist/v0.9.1/)
