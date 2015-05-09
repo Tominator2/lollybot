@@ -4,7 +4,7 @@
 Telemetry and Control
 =====================
 
-This is a cross-platform JavaScript + HTML5 version of the control and telemetry code for [Lollybot](http://tomtilley.net/projects/lollybot) (formerly known as "Suckerbot") - my entry in the [African Robotics Network (AFRON)](http://www.robotics-africa.org/) [10 Dollar Robot Design Challenge](http://www.robotics-africa.org/afron-design-challenges/10-dollar-robot-design-challenge.html). 
+This is a cross-platform JavaScript + HTML5 version of the control and telemetry code for [Lollybot](http://tomtilley.net/projects/lollybot) (formerly known as "Suckerbot") - my entry in the [African Robotics Network (AFRON)](http://www.robotics-africa.org/) ["10 Dollar Robot" Design Challenge](http://www.robotics-africa.org/afron-design-challenges/10-dollar-robot-design-challenge.html). 
 
 Lollybot is a tethered robot made from a hacked USB joystick.  The telemetry and control code consists of two parts:
  *   a JavaScript server running on [Node.js](http://nodejs.org/) that communicates with the joystick via USB using [node-hid](https://github.com/hanshuebner/node-hid) and... 
