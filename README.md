@@ -12,7 +12,7 @@ Lollybot is a tethered robot made from a hacked USB joystick.  The telemetry and
 
 [![Screenshot](https://cloud.githubusercontent.com/assets/4344677/7550074/88494e12-f67d-11e4-9af8-ce391f643913.jpg)](http://tomtilley.net/projects/suckerbot/html5/)
 
-You can download the latest version here: [lollybot-v0.2.0.zip](https://github.com/Tominator2/lollybot/archive/lollybot-v0.2.0.zip) (1.8 MB)
+You can download the latest version of the software [here](https://github.com/Tominator2/lollybot/releases/latest). 
 
 In the Wiki you will find some information to help you get started [writing your own control mode for Lollybot](https://code.google.com/p/lollybot/wiki/ControllingLollybot).
 
