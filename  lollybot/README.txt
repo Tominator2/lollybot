@@ -12,12 +12,12 @@ Suckerbot was a submission in the tethered robot category.  The robot
 is connected to a computer via a USB cable where both the computing
 and the programming take place.  You can find more details online at: 
 
-http://www.tomtilley.net/projects/suckerbot/ 
+http://www.tomtilley.net/projects/lollybot/ 
 
 This software is Open Source and the code is released under the GNU
 Public License. You can download the software which includes the source at:
 
-https://code.google.com/p/lollybot/
+https://github.com/Tominator2/lollybot
 
 
 OVERVIEW:
@@ -30,7 +30,7 @@ The telemetry and control code consists of two parts:
 2) An HTML5 + JavaScript client that runs in a web browser. You can
    visit a live version of the client page at:
 
-   http://tomtilley.net/projects/suckerbot/html5
+   http://tomtilley.net/projects/lollybot/html5
 
 
 REQUIREMENTS:
@@ -84,7 +84,7 @@ GETTING STARTED - Windows:
 6) Open the 'index.html' file in a modern web browser (see
    'requirements' above) or point your browser at: 
 
-     http://tomtilley.net/projects/suckerbot/html5/
+     http://tomtilley.net/projects/lollybot/html5/
 
 7) The Lollybot's speech bubble at the top of the screen should change
    from a red cross to a green tick when you are connected to the
@@ -139,7 +139,7 @@ GETTING STARTED - Mac OS/Linux:
 6) Open the 'index.html' file in a modern web browser (see
    'requirements' above) or point your browser at: 
 
-     http://tomtilley.net/projects/suckerbot/html5/
+     http://tomtilley.net/projects/lollybot/html5/
 
 7) The Lollybot's speech bubble at the top of the screen should change
    from a red cross to a green tick when you are connected to the
