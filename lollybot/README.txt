@@ -98,7 +98,7 @@ GETTING STARTED - Mac OS/Linux:
 -------------------------------
 
 1) Install Node.js version 0.9.1 (available at http://nodejs.org/dist/v0.9.1/)
-   (see: http://code.google.com/p/lollybot/wiki/LinuxBuild for more details
+   (see: https://github.com/Tominator2/lollybot/wiki/Linux-Build for more details
    about installing Node.js with Ubuntu 12.04)
 
 2) Open a terminal and then change into the directory containing this
@@ -125,7 +125,7 @@ GETTING STARTED - Mac OS/Linux:
    For additional help see:
 
      https://github.com/hanshuebner/node-hid
-     http://code.google.com/p/lollybot/wiki/LinuxBuild
+     https://github.com/Tominator2/lollybot/wiki/Linux-Build
 
 5) Connect the robot's USB cable to the computer and start the server
    by typing:
@@ -192,9 +192,9 @@ TROUBLESHOOTING:
     npm uninstall socket.io
     npm install socket.io@0.9.13
 
-- Check the Lollybot Wiki page for issues at Google Code: 
+- Check the Lollybot Wiki page on GitHub for issues: 
 
-    http://code.google.com/p/lollybot/w/list
+    https://github.com/Tominator2/lollybot/wiki
 
 
 CHANGE LOG:
