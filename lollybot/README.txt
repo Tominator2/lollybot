@@ -43,7 +43,7 @@ REQUIREMENTS:
       	 - Socket.IO v0.9.13 (http://socket.io/) 
                      Note that Socket.IO has been updated and newer versions 
                      won't work!
-         - node-hid  (https://github.com/hanshuebner/node-hid)	  
+         - node-hid  (https://github.com/node-hid/node-hid)	  
 
 - a modern, HTML5 compliant web-browser: 
     - Chrome 6+ 	
@@ -124,7 +124,7 @@ GETTING STARTED - Mac OS/Linux:
 
    For additional help see:
 
-     https://github.com/hanshuebner/node-hid
+     https://github.com/node-hid/node-hid
      https://github.com/Tominator2/lollybot/wiki/Linux-Build
 
 5) Connect the robot's USB cable to the computer and start the server
