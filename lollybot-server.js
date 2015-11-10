@@ -40,6 +40,8 @@
 // - Should check for exit in repl and disconnect/check-in any USB
 //   devices in use as well as turning off motors.
 //   see: http://nodejs.org/api/repl.html#repl_event_exit
+// - Check for x86 or x64 and use the appropriate version of node.hid
+//   (currently only win32).
 //
 
 var program = require('commander');  // plug-in for command line options
@@ -49,7 +51,7 @@ var program = require('commander');  // plug-in for command line options
 var HID = null;
 var os = require('os');
 if (os.platform() == 'win32') { // both 32 & 63 bit windows return 'win32'
-    HID = require('./windows/HID');  // pre-compiled plug-in for WinXP/7
+    HID = require('./windows/x86/HID');  // pre-compiled plug-in for WinXP/7
     }
 else {
     HID = require('node-hid');       // plug-in for Linux/Mac
@@ -61,7 +63,7 @@ var ifaces = os.networkInterfaces();
 var REPL = require('repl');          // Needed by node-hid
 var repl = REPL.start({ignoreUndefined: true}); // REPL.start('node-hid> ');
 
-var versionNo = "0.2.0";
+var versionNo = "0.2.2";
 
 var portNo = "8075"; // Default port for conections - "BOTS" in 1337!
 
@@ -194,7 +196,7 @@ if (V_ID == 0 || P_ID == 0 || isNaN(V_ID) || isNaN(P_ID)) {
 	
 	// Check to see if we have appropriate permissions!
 	if (!usbDev.product) {
-		console.error('Cannot access USB device properties!\nIf you are running on a Unix-like system check that you have appropriate permissions (or try \'sudo node lollybot-server.js\'');
+		console.error('Cannot access USB device properties!\nIf you are running on a Unix-like system check that you have appropriate permissions (or try \'sudo node lollybot-server.js\')');
 		process.exit(1);	
 	}
 
