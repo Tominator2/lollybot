@@ -1,6 +1,6 @@
 Lollybot HTML5 + JavaScript Telemetry & Control 
-Version 0.2.1
-June 25, 2014
+Version 0.2.2
+November 10, 2015
 
 This is the software for Lollybot (formerly known as "Suckerbot") my
 entry in the African Robotics Network (AFRON) $10 Robot Design
@@ -55,7 +55,9 @@ REQUIREMENTS:
 
 GETTING STARTED - Windows:
 -------------------------
-1) Install Node.js version 0.9.1 for Windows:
+
+1) Install Node.js version 0.9.1 for Windows 32 bit (the pre-compiled
+   node-hid plug-in only works with the 32 bit version!):
 
      http://nodejs.org/dist/v0.9.1/node-v0.9.1-x86.msi
 
@@ -71,8 +73,9 @@ GETTING STARTED - Windows:
      npm install socket.io@0.9.13
 
 4) The software comes with a pre-built version of the node-hid plugin
-   for windows ('Hid.node') that has been tested on WinXP and Windows 7
-   so you don't need to install it.
+   for the windows 32 bit version of node (in 'windows\x86\HID.node')
+   that has been tested on WinXP and Windows 7 so you don't need to
+   install it.
 
 5) Connect the robot's USB cable to the computer then start the server 
    by typing:
@@ -161,6 +164,12 @@ TROUBLESHOOTING:
   
     node -v
 
+- If you are on a 64 bit Windows machine make sure that you use the
+  win 32 version of Node.js NOT the x64 version (see step 1 under
+  'Getting Started' for Windows above).  The pre-compiled version of
+  the node-hid plug-in will only work with the 32 bit version of
+  Node.js.
+
 - If the server reports that it cannot check out the USB device on
   Linux or MacOS make sure that you are running as root or use: 
 
@@ -192,13 +201,18 @@ TROUBLESHOOTING:
     npm uninstall socket.io
     npm install socket.io@0.9.13
 
-- Check the Lollybot Wiki page on GitHub for issues: 
+- Check the Lollybot page on GitHub for issues: 
 
-    https://github.com/Tominator2/lollybot/wiki
+    https://github.com/Tominator2/lollybot/issues
 
 
 CHANGE LOG:
 -----------
+
+v0.2.2
+- Moved the win32 HID.node plug-in and changed the README's to note
+  that it is for win32 only.  Updated the old google
+
 v0.2.1
 - Updated the installation instructions which break with newer versions
   of Socket.IO and to workaround the expired SSL certificate problem
